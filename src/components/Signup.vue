@@ -70,8 +70,8 @@ export default {
       alert: false,
       colleges: [
         'Mahidol University', 'Kasetsart University', 'Chulalongkorn University', 'Thammasat University',
-        'Chiang Mai University', 'Prince of Songkla University','Khon Kaen University',
-        'Burapha University','Sripatum University','King Mongkut\'s University of Technology Thonburi'
+        'Chiang Mai University', 'Prince of Songkla University', 'Khon Kaen University',
+        'Burapha University', 'Sripatum University', 'King Mongkut\'s University of Technology Thonburi'
       ]
     }
   },
