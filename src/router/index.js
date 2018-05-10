@@ -6,6 +6,7 @@ import Landing from '@/components/Landing'
 import NotFound from '@/components/NotFound'
 import Signup from '@/components/Signup'
 import Signin from '@/components/Signin'
+import EditProfile from '@/components/EditProfile'
 
 Vue.use(Router)
 
@@ -56,6 +57,12 @@ export default new Router({
       path: '*',
       name: 'NotFound',
       component: NotFound
+    },
+    {
+      path: '/edit-profile',
+      name: 'EditProfile',
+      component: EditProfile,
+      beforeEnter: AuthGuard
     }
   ],
   mode: 'history'
