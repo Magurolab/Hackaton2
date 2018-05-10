@@ -6,7 +6,6 @@ import Landing from '@/components/Landing'
 import NotFound from '@/components/NotFound'
 import Signup from '@/components/Signup'
 import Signin from '@/components/Signin'
-import Profile from '@/components/Profile'
 
 Vue.use(Router)
 
@@ -52,11 +51,6 @@ export default new Router({
       name: 'Home',
       component: Home,
       beforeEnter: AuthGuard
-    },
-    {
-      path: '/profile',
-      name: 'Profile',
-      component: Profile
     },
     {
       path: '*',

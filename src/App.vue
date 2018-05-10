@@ -5,6 +5,7 @@
       fixed
       clipped
       class="grey lighten-4"
+      v-if="isAuthenticated"
       app
     >
       <v-list
@@ -51,7 +52,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar color="amber" app absolute clipped-left app>
-      <v-toolbar-side-icon @click.native="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-side-icon @click.native="drawer = !drawer" v-if="isAuthenticated" ></v-toolbar-side-icon>
       <span class="title ml-3 mr-5">Alibaybay</span>
       <v-text-field
         solo-inverted

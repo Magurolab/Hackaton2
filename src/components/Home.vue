@@ -14,7 +14,7 @@
         <v-card-title primary-title>
           <div>
             <h3 class="headline mb-0">Kangaroo Valley Safari</h3>
-            <div>Located two hours south of Sydney in the <br>Southern Highlands of New South Wales, ...</div>
+            <div>{{this.$store.state.user.email}}</div>
           </div>
         </v-card-title>
         <v-card-actions>
@@ -28,5 +28,39 @@
 </template>
 
 <script>
-export default {}
+  export default {
+    data () {
+      return {
+        email: this.$store.getters.getEmail,
+        password: '',
+        alert: false
+      }
+    },
+    methods: {
+
+    },
+    computed: {
+      error () {
+        return this.$store.state.error
+      },
+      loading () {
+        return this.$store.state.loading
+      },
+      getEmail () {
+        return this.$store.getters.getEmail
+      }
+    },
+    watch: {
+      error (value) {
+        if (value) {
+          this.alert = true
+        }
+      },
+      alert (value) {
+        if (!value) {
+          this.$store.commit('setError', null)
+        }
+      }
+    }
+  }
 </script>
