@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import firebase from 'firebase'
 import Home from '@/components/Home'
 import Landing from '@/components/Landing'
-// import NotFound from '@/components/NotFound'
+import NotFound from '@/components/NotFound'
 import Signup from '@/components/Signup'
 import Signin from '@/components/Signin'
 
@@ -14,6 +14,14 @@ const AuthGuard = (to, from, next) => {
     next()
   } else {
     next('/signin')
+  }
+}
+
+const isAuthorized = (to, from, next) => {
+  if (firebase.auth().currentUser) {
+    next('/')
+  } else {
+    next()
   }
 }
 
@@ -29,24 +37,26 @@ export default new Router({
     {
       path: '/signin',
       name: 'Signin',
-      component: Signin
+      component: Signin,
+      beforeEnter: isAuthorized
     },
     {
       path: '/signup',
       name: 'Signup',
-      component: Signup
+      component: Signup,
+      beforeEnter: isAuthorized
     },
     {
       path: '/home',
       name: 'Home',
       component: Home,
       beforeEnter: AuthGuard
+    },
+    {
+      path: '*',
+      name: 'NotFound',
+      component: NotFound
     }
-    // {
-    //   path: '*',
-    //   name: 'NotFound',
-    //   component: NotFound
-    // }
   ],
   mode: 'history'
 })
