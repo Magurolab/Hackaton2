@@ -41,6 +41,15 @@
                 :rules="[comparePasswords]"
                 ></v-text-field>
             </v-flex>
+            <v-flex xs6>
+              <v-select
+                name="university"
+                label="University"
+                id="University"
+                :items="colleges"
+                single-line
+              ></v-select>
+            </v-flex>
             <v-flex class="text-xs-center" mt-5>
               <v-btn color="primary" type="submit" :disabled="loading">Sign Up</v-btn>
             </v-flex>
@@ -58,7 +67,12 @@ export default {
       email: '',
       password: '',
       passwordConfirm: '',
-      alert: false
+      alert: false,
+      colleges: [
+        'Mahidol University', 'Kasetsart University', 'Chulalongkorn University', 'Thammasat University',
+        'Chiang Mai University', 'Prince of Songkla University','Khon Kaen University',
+        'Burapha University','Sripatum University','King Mongkut\'s University of Technology Thonburi'
+      ]
     }
   },
   computed: {
