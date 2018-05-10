@@ -1,6 +1,6 @@
 import firebase from 'firebase'
 
-const config = {
+var config = {
   apiKey: 'AIzaSyA8YBu0mev63vnBzIQiYy6M4G3Ehnt_mtQ',
   authDomain: 'hackaton2-7d785.firebaseapp.com',
   databaseURL: 'https://hackaton2-7d785.firebaseio.com',
