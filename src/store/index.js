@@ -63,6 +63,11 @@ export const store = new Vuex.Store({
       firebase.auth().signOut()
       commit('setUser', null)
       router.push('/')
+    },
+    // rewritten needed.
+    userEdit ({commit}, payload) {
+      commit('setLoading', true)
+      firebase.auth().currentUser.updateEmail(payload.email)
     }
   },
   getters: {
