@@ -27,13 +27,12 @@ export const store = new Vuex.Store({
     }
   },
   actions: {
-    userSignUp (state, {commit}, payload) {
+    userSignUp ({commit}, payload) {
       commit('setLoading', true)
       firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
       .then(firebaseUser => {
         commit('setUser', {email: firebaseUser.email})
         const uid = auth.currentUser.uid
-        state.uid = uid
         db.ref('Users/' + uid).set({
           university: payload.university
         })
