@@ -65,6 +65,7 @@
     methods: {
       userEdit () {
         this.$store.dispatch('userEdit', { email: this.email, description: this.description, university: this.university })
+
       }
     },
     computed: {

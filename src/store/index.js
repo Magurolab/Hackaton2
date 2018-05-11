@@ -67,7 +67,21 @@ export const store = new Vuex.Store({
     // rewritten needed.
     userEdit ({commit}, payload) {
       commit('setLoading', true)
-      firebase.auth().currentUser.updateEmail(payload.email)
+      var newData = {
+        email: payload.email,
+        description: payload.description,
+        university: payload.university
+      }
+      var newPostKey = firebase.database().ref().child('Users').push().key
+      var updates = {}
+      updates['/posts/' + newPostKey] = newData;
+      updates['/user-posts/' + uid + '/' + newPostKey] = newData
+      commit('setloading', false)
+      firebase.database().ref().update(updates)
+        .catch(error =>{
+          commit('setError', error.message)
+          commit('setLoading', false)
+        })
     }
   },
   getters: {
