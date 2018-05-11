@@ -80,6 +80,7 @@ export const store = new Vuex.Store({
       // updates['/Users/' + newPostKey] = newData
       updates['/Users/' + auth.currentUser.uid] = newData
       commit('setLoading', false)
+
       firebase.database().ref().update(updates).then(() => {
         router.push('/home')
       })
@@ -87,6 +88,23 @@ export const store = new Vuex.Store({
           commit('setError', error.message)
           commit('setLoading', false)
         })
+      router.push('/home')
+    },
+    addItem ({commit}, payload) {
+      commit('setLoading', true)
+      const uid = auth.currentUser.uid
+      var postKey = db.ref('Posts/').push().key
+      var updates = {}
+      var postData = {
+        name: payload.name,
+        description: payload.description,
+        price: payload.price,
+        category: payload.category,
+        user: uid
+      }
+      updates['/Posts/' + postKey] = postData
+      db.ref().update(updates)
+      router.push('/home')
     }
   },
   getters: {
