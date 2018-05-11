@@ -94,7 +94,7 @@ export default {
       if (this.comparePasswords !== true) {
         return
       }
-      this.$store.dispatch('userSignUp', { email: this.email, password: this.password , university:this.university})
+      this.$store.dispatch('userSignUp', {email: this.email, password: this.password, university: this.university})
     }
   },
   watch: {

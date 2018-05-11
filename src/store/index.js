@@ -11,7 +11,8 @@ export const store = new Vuex.Store({
     appTitle: 'My Awesome App',
     user: null,
     error: null,
-    loading: false
+    loading: false,
+    database: null
   },
   mutations: {
     setUser (state, payload) {
@@ -31,9 +32,9 @@ export const store = new Vuex.Store({
       .then(firebaseUser => {
         commit('setUser', {email: firebaseUser.email})
         const uid = auth.currentUser.uid
-        db.ref('Users/'+uid).set({
-          university:payload.university
-        });
+        db.ref('Users/' + uid).set({
+          university: payload.university
+        })
         commit('setLoading', false)
         router.push('/home')
       })
@@ -69,8 +70,21 @@ export const store = new Vuex.Store({
     isAuthenticated (state) {
       return state.user !== null && state.user !== undefined
     },
-    getEmail(){
+    getUserEmail () {
       return auth.currentUser.email
+    },
+    getUserUniversity (state) {
+      state.loading = true
+      const uid = auth.currentUser.uid
+      const ref = db.ref('Users/' + uid + '/university')
+      // var university = null
+      ref.on('value', function (snapshot) {
+        state.database = (snapshot.val())
+        // console.log(store.state.database)
+        // console.log(university)
+      })
+      state.loading = false
+      return state.database
     }
   }
 })
