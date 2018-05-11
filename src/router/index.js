@@ -7,6 +7,7 @@ import NotFound from '@/components/NotFound'
 import Signup from '@/components/Signup'
 import Signin from '@/components/Signin'
 import EditProfile from '@/components/EditProfile'
+import AddItem from '@/components/AddItem'
 
 Vue.use(Router)
 
@@ -62,6 +63,12 @@ export default new Router({
       path: '/edit-profile',
       name: 'EditProfile',
       component: EditProfile,
+      beforeEnter: AuthGuard
+    },
+    {
+      path: '/add-item',
+      name: 'AddItem',
+      component: AddItem,
       beforeEnter: AuthGuard
     }
   ],

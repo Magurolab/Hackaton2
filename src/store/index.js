@@ -64,13 +64,33 @@ export const store = new Vuex.Store({
       firebase.auth().signOut()
       commit('setUser', null)
       router.push('/')
+    },
+    userEdit ({commit}, payload) {
+      commit('setLoading', true)
+      const uid = auth.currentUser.uid
+      if (payload.email !== '') {
+        firebase.auth().currentUser.updateEmail(payload.email)
+      }
+      if (payload.description !== '') {
+        db.ref('Users/' + uid).set({
+          description: payload.description
+        })
+      }
+      if (payload.university !== '') {
+        db.ref('Users/' + uid).set({
+          university: payload.university
+        })
+      }
+      commit('setLoading', false)
+      router.push('/home')
     }
   },
   getters: {
     isAuthenticated (state) {
       return state.user !== null && state.user !== undefined
     },
-    getUserEmail () {
+
+    getEmail () {
       return auth.currentUser.email
     },
     getUserUniversity (state) {

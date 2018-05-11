@@ -28,6 +28,7 @@
           <v-btn flat color="orange">Explore</v-btn>
         </v-card-actions>
       </v-card>
+        <v-btn to="/edit-profile"> edit</v-btn>
     </v-flex>
     </v-layout>
   </v-container>

@@ -89,8 +89,8 @@
     data: () => ({
       drawer: null,
       items: [
-        { icon: 'assignment_ind', text: 'Edit Profile', path: '/edit-profile' }
-        // { icon: 'touch_app', text: 'Reminders', path: '/' },
+        { icon: 'assignment_ind', text: 'Edit Profile', path: '/edit-profile' },
+        { icon: 'add_shopping_cart', text: 'Sell', path: '/add-item' }
         // { divider: true },
         // { heading: 'Labels' },
         // { icon: 'add', text: 'Create new label' },
