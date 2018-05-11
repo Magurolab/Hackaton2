@@ -21,20 +21,23 @@
               v-model="email"
               ></v-text-field>
           </v-flex>
-          <v-flex>
-            <v-text-field
-              name="University"
+          <v-flex xs6>
+            <v-select
+              name="university"
               label="University"
               id="university"
-              type="university"
-              v-model="text"
-              ></v-text-field>
+              :items="colleges"
+              single-line
+              v-model="university"
+            ></v-select>
+          </v-flex>
+          <v-flex>
             <v-text-field
               name="Description"
               label="Description"
               id="description"
               type="description"
-              v-model="text"
+              v-model="description"
             ></v-text-field>
           </v-flex>
           <v-flex class="text-xs-center" mt-5>
@@ -59,6 +62,11 @@
         email: '',
         description: '',
         university: '',
+        colleges: [
+          'Mahidol University', 'Kasetsart University', 'Chulalongkorn University', 'Thammasat University',
+          'Chiang Mai University', 'Prince of Songkla University', 'Khon Kaen University',
+          'Burapha University', 'Sripatum University', 'King Mongkut\'s University of Technology Thonburi'
+        ],
         alert: false
       }
     },
