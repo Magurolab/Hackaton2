@@ -71,31 +71,19 @@
       }
     },
     methods: {
-      getAllPosts: function () {
-        db.ref('/Posts/').once('value').then(function (snapshot) {
-          var postObject = snapshot.val()
-          // var keys = Object.keys(postObject)
-          // this.posts = postObject
-          // console.log(postObject)
-          var tmp = []
-          for (let key in postObject) {
-            tmp.push({
-              id: key,
-              category: postObject[key].category,
-              description: postObject[key].description,
-              name: postObject[key].name,
-              price: postObject[key].price,
-              url: postObject[key].url,
-              user: postObject[key].user
-            })
-          }
-          this.posts = tmp
-        })
-      }
+      // not now
     },
     beforeMount () {
-      this.getAllPosts()
-      // console.log(this.posts)
+      // this.getAllPosts()
+      this.$store.dispatch('loadCards')
+      var i = 0
+      while (i < 1000) { // you can delete this loop na
+        console.log(this.$store.state.cards)
+        i += 1
+        if (i === 1000) {
+          break
+        }
+      }
     },
     watch: {
       // getPosts () {
