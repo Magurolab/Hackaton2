@@ -1,10 +1,11 @@
 <template>
   <v-container fluid>
-    <v-flex xs12 class="text-xs-center" mt-5 v-if="loading">
-      <v-progress-circular :size="70" :width="7" indeterminate color="purple"></v-progress-circular>
-    </v-flex>
+    <!--<v-flex xs12 class="text-xs-center" mt-5 v-if="loading">-->
+      <!--<v-progress-circular :size="70" :width="7" indeterminate color="purple"></v-progress-circular>-->
+    <!--</v-flex>-->
 
-    <v-layout row wrap v-if="!loading">
+    <v-layout row wrap>
+              <!--v-if="!loading"-->
       <v-flex xs12 class="text-xs-center" mt-5>
         <h1>Home page</h1>
       </v-flex>

@@ -104,13 +104,12 @@ export const store = new Vuex.Store({
           case firebase.storage.TaskState.RUNNING: // or 'running'
             console.log('Upload is running')
             break
+          case firebase.storage.TaskState.SUCCESS:
+            console.log('Upload success')
         }
       }, function (error) {
         console.log(error)
       }, function () {
-        uploadTask.snapshot.ref.getDownloadURL().then(url => {
-          console.log(url)
-        })
         const uid = auth.currentUser.uid
         var postKey = db.ref('Posts/').push().key
         var updates = {}
@@ -120,7 +119,11 @@ export const store = new Vuex.Store({
           price: payload.price,
           category: payload.category,
           user: uid,
+          url: ''
         }
+        uploadTask.snapshot.ref.getDownloadURL().then(url => {
+          db.ref('Posts/' + postKey + '/url').set(url)
+        })
         updates['/Posts/' + postKey] = postData
         db.ref().update(updates)
         // console.log('File available at', downloadURL)

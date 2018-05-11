@@ -15,7 +15,7 @@
     },
 
     methods: {
-      handleFileChange(e) {
+      handleFileChange (e) {
         this.$emit('input', e.target.files[0])
       }
     }
