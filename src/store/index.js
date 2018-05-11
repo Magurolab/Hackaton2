@@ -88,7 +88,7 @@ export const store = new Vuex.Store({
       commit('setLoading', true)
       const uid = auth.currentUser.uid
       var postKey = db.ref('Posts/').push().key
-      var updates = {};
+      var updates = {}
       var postData = {
         name: payload.name,
         description: payload.description,

@@ -1,58 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer
-      v-model="drawer"
-      fixed
-      clipped
-      class="grey lighten-4"
-      v-if="isAuthenticated"
-      app
-    >
-      <v-list
-        dense
-        class="grey lighten-4"
-      >
-        <template v-for="(item, i) in items">
-          <v-layout
-            v-if="item.heading"
-            :key="i"
-            row
-            align-center
-          >
-            <v-flex xs6>
-              <v-subheader v-if="item.heading">
-                {{ item.heading }}
-              </v-subheader>
-            </v-flex>
-            <v-flex xs6 class="text-xs-right">
-              <v-btn small flat>edit</v-btn>
-            </v-flex>
-          </v-layout>
-          <v-divider
-            v-else-if="item.divider"
-            :key="i"
-            dark
-            class="my-3"
-          ></v-divider>
-          <v-list-tile
-            v-else
-            :key="i"
-            :to="item.path"
-          >
-            <v-list-tile-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title class="grey--text">
-                {{ item.text }}
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </template>
-      </v-list>
-    </v-navigation-drawer>
     <v-toolbar color="amber" app absolute clipped-left app>
-      <v-toolbar-side-icon @click.native="drawer = !drawer" v-if="isAuthenticated" ></v-toolbar-side-icon>
       <span class="title ml-3 mr-5">Alibaybay</span>
       <v-text-field
         solo-inverted
@@ -68,6 +16,7 @@
           :key="item.title"
           :to="item.path">
           <v-icon left dark>{{ item.icon }}</v-icon>
+
           {{ item.title }}
         </v-btn>
         <v-btn flat @click="userSignOut" v-if="isAuthenticated">
@@ -75,6 +24,25 @@
           Sign Out
         </v-btn>
       </v-toolbar-items>
+      <v-tabs
+        icons-and-text
+        dark
+        v-if="isAuthenticated"
+        slot="extension"
+        centered
+        color="grey"
+        slider-color="brown"
+      >
+        <v-tab
+          v-for="(item,i) in items"
+          :key="i"
+          :href="`#tab-${i}`"
+          :to="item.path"
+        >
+          {{ item.text }}
+          <v-icon left dark>{{ item.icon }}</v-icon>
+        </v-tab>
+      </v-tabs>
     </v-toolbar>
     <v-content>
       <v-container fluid fill-height class="grey lighten-4">
@@ -89,8 +57,11 @@
     data: () => ({
       drawer: null,
       items: [
+        { icon: 'home', text: 'Home', path: '/home' },
         { icon: 'assignment_ind', text: 'Edit Profile', path: '/edit-profile' },
-        { icon: 'add_shopping_cart', text: 'Sell', path: '/add-item' }
+        { icon: 'add_shopping_cart', text: 'Buy', path: '/buy' },
+        { icon: 'attach_money', text: 'Sell', path: '/add-item' },
+        { icon: 'bookmark_border', text: 'Wishlist', path: '/Wishlist' }
         // { divider: true },
         // { heading: 'Labels' },
         // { icon: 'add', text: 'Create new label' },
@@ -121,7 +92,6 @@
       menuItems () {
         if (this.isAuthenticated) {
           return [
-            { title: 'Home', path: '/home', icon: 'home' }
           ]
         } else {
           return [
