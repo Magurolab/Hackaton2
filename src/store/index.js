@@ -83,6 +83,22 @@ export const store = new Vuex.Store({
       }
       commit('setLoading', false)
       router.push('/home')
+    },
+    addItem ({commit}, payload) {
+      commit('setLoading', true)
+      const uid = auth.currentUser.uid
+      var postKey = db.ref('Posts/').push().key
+      var updates = {};
+      var postData = {
+        name: payload.name,
+        description: payload.description,
+        price: payload.price,
+        category: payload.category,
+        user: uid
+      }
+      updates['/Posts/' + postKey] = postData
+      db.ref().update(updates)
+      router.push('/home')
     }
   },
   getters: {
