@@ -93,6 +93,7 @@ export const store = new Vuex.Store({
     isAuthenticated (state) {
       return state.user !== null && state.user !== undefined
     },
+
     getEmail () {
       return auth.currentUser.email
     },

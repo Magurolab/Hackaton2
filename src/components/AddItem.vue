@@ -9,7 +9,7 @@
         <img v-bind:src=image height="300px" width="300px"/>
       </v-flex>
       <v-flex xs12 sm6 offset-sm3 mt-3>
-        <form @submit.prevent="userSignUp">
+        <form @submit.prevent="addItem">
           <v-layout column>
             <v-flex>
               <v-alert type="error" dismissible v-model="alert">
@@ -82,7 +82,7 @@
       return {
         name: '',
         description: '',
-        price: 30,
+        price: '',
         category: '',
         image: '',
         alert: false,
@@ -90,9 +90,6 @@
       }
     },
     computed: {
-      comparePasswords () {
-        return this.password === this.passwordConfirm ? true : 'Passwords don\'t match'
-      },
       error () {
         return this.$store.state.error
       },
@@ -101,11 +98,8 @@
       }
     },
     methods: {
-      userSignUp () {
-        if (this.comparePasswords !== true) {
-          return
-        }
-        this.$store.dispatch('userSignUp', {email: this.email, password: this.password, university: this.university})
+      addItem () {
+        this.$store.dispatch('addItem', {name: this.name, description: this.description, price: this.price, category: this.category})
       }
     },
     watch: {
