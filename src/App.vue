@@ -37,7 +37,7 @@
           <v-list-tile
             v-else
             :key="i"
-            @click=""
+            :to="item.path"
           >
             <v-list-tile-action>
               <v-icon>{{ item.icon }}</v-icon>
@@ -89,26 +89,29 @@
     data: () => ({
       drawer: null,
       items: [
-        { icon: 'lightbulb_outline', text: 'Notes' },
-        { icon: 'touch_app', text: 'Reminders' },
-        { divider: true },
-        { heading: 'Labels' },
-        { icon: 'add', text: 'Create new label' },
-        { divider: true },
-        { icon: 'archive', text: 'Archive' },
-        { icon: 'delete', text: 'Trash' },
-        { divider: true },
-        { icon: 'settings', text: 'Settings' },
-        { icon: 'chat_bubble', text: 'Trash' },
-        { icon: 'help', text: 'Help' },
-        { icon: 'phonelink', text: 'App downloads' },
-        { icon: 'keyboard', text: 'Keyboard shortcuts' }
+        { icon: 'assignment_ind', text: 'Edit Profile', path: '/edit-profile' },
+        { icon: 'add_shopping_cart', text: 'Sell', path: '/add-item' }
+        // { divider: true },
+        // { heading: 'Labels' },
+        // { icon: 'add', text: 'Create new label' },
+        // { divider: true },
+        // { icon: 'archive', text: 'Archive' },
+        // { icon: 'delete', text: 'Trash' },
+        // { divider: true },
+        // { icon: 'settings', text: 'Settings' },
+        // { icon: 'chat_bubble', text: 'Trash' },
+        // { icon: 'help', text: 'Help' },
+        // { icon: 'phonelink', text: 'App downloads' },
+        // { icon: 'keyboard', text: 'Keyboard shortcuts' }
       ]
     }),
     props: {
       source: String
     },
     computed: {
+      loading () {
+        return this.$store.state.loading
+      },
       appTitle () {
         return this.$store.state.appTitle
       },
