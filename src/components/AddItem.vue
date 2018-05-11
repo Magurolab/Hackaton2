@@ -17,6 +17,10 @@
               </v-alert>
             </v-flex>
             <v-flex xs6 sm3>
+              <p>My File Selector: <file-select v-model="file"></file-select></p>
+              <p v-if="file">{{file.name}}</p>
+            </v-flex>
+            <v-flex xs6 sm3>
               <v-text-field
                 name="image"
                 label="Image Source"
@@ -77,6 +81,7 @@
 </template>
 
 <script>
+  import FileSelect from './FileSelect.vue'
   export default {
     data () {
       return {
@@ -86,8 +91,12 @@
         category: '',
         image: '',
         alert: false,
+        file: null,
         categories: ['Book', 'Furniture', 'Electronics', 'Clothing', 'Other']
       }
+    },
+    components: {
+      FileSelect
     },
     computed: {
       error () {
@@ -99,7 +108,7 @@
     },
     methods: {
       addItem () {
-        this.$store.dispatch('addItem', {name: this.name, description: this.description, price: this.price, category: this.category})
+        this.$store.dispatch('addItem', {name: this.name, description: this.description, price: this.price, category: this.category, file: this.file})
       }
     },
     watch: {

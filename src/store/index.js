@@ -91,18 +91,41 @@ export const store = new Vuex.Store({
     },
     addItem ({commit}, payload) {
       commit('setLoading', true)
-      const uid = auth.currentUser.uid
-      var postKey = db.ref('Posts/').push().key
-      var updates = {}
-      var postData = {
-        name: payload.name,
-        description: payload.description,
-        price: payload.price,
-        category: payload.category,
-        user: uid
-      }
-      updates['/Posts/' + postKey] = postData
-      db.ref().update(updates)
+      var fileName = payload.file.name
+      var storageRef = firebase.storage().ref('images/' + fileName)
+      var uploadTask = storageRef.put(payload.file)
+      uploadTask.on('state_changed', function (snapshot) {
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        console.log('Upload is ' + progress + '% done')
+        switch (snapshot.state) {
+          case firebase.storage.TaskState.PAUSED: // or 'paused'
+            console.log('Upload is paused')
+            break
+          case firebase.storage.TaskState.RUNNING: // or 'running'
+            console.log('Upload is running')
+            break
+        }
+      }, function (error) {
+        console.log(error)
+      }, function () {
+        uploadTask.snapshot.ref.getDownloadURL().then(url => {
+          console.log(url)
+        })
+        const uid = auth.currentUser.uid
+        var postKey = db.ref('Posts/').push().key
+        var updates = {}
+        var postData = {
+          name: payload.name,
+          description: payload.description,
+          price: payload.price,
+          category: payload.category,
+          user: uid,
+        }
+        updates['/Posts/' + postKey] = postData
+        db.ref().update(updates)
+        // console.log('File available at', downloadURL)
+      })
+      commit('setLoading', false)
       router.push('/home')
     }
   },
