@@ -76,13 +76,9 @@
     beforeMount () {
       // this.getAllPosts()
       this.$store.dispatch('loadCards')
-      var i = 0
-      while (i < 1000) { // you can delete this loop na
+
+      while (this.$store.state.cards === null) { // you can delete this loop na
         console.log(this.$store.state.cards)
-        i += 1
-        if (i === 1000) {
-          break
-        }
       }
     },
     watch: {
