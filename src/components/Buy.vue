@@ -1,61 +1,42 @@
 <template>
-  <v-layout column>
-    <v-flex xs12 sm6 >
-
-      <v-card>
-        <v-container fluid grid-list-sm>
-
-          <v-layout row wrap>
-            <v-flex
-              v-for="card in cards"
-              v-bind="{ [`xs${card.flex}`]: true }"
-              :key="card.title"
-              xs4
+  <v-flex xs12>
+    <v-card>
+      <v-container v-bind="{ [`grid-list-lg`]: true }" fluid >
+        <v-layout row wrap>
+          <v-flex
+            v-for="n in 24"
+            :key="n"
+            xs12 sm6  md3 lg3  >
+            <v-card-media
+              :src= "`https://unsplash.it/300/300?image=${Math.floor(Math.random() * 100) + 1}`"
+              height="300px"
             >
-              <v-card>
-                <v-card-media
-                  :src="card.src"
-                  height="200px"
-                >
-                  <v-container fill-height fluid>
-                    <v-layout fill-height>
-                      <v-flex xs12 align-end flexbox>
-                        <span class="headline white--text" v-text="card.title"></span>
-                      </v-flex>
-                    </v-layout>
-                  </v-container>
-                </v-card-media>
-                <v-card-actions>
-                  <v-spacer></v-spacer>
-                  <v-btn icon>
-                    <v-icon>favorite</v-icon>
-                  </v-btn>
-                  <v-btn icon>
-                    <v-icon>bookmark</v-icon>
-                  </v-btn>
-                  <v-btn icon>
-                    <v-icon>share</v-icon>
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-flex>
-          </v-layout>
+            </v-card-media>
+            <v-card-actions>
+            <v-spacer></v-spacer>
+              <v-btn icon>
+              <v-icon>favorite</v-icon>
+              </v-btn>
+              <v-btn icon>
+              <v-icon>bookmark</v-icon>
+              </v-btn>
+              <v-btn icon>
+              <v-icon>share</v-icon>
+              </v-btn>
+            </v-card-actions>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-card>
+  </v-flex>
 
-        </v-container>
-      </v-card>
-
-    </v-flex>
-  </v-layout>
 </template>
 <script>
   import { auth, db } from '../firebase'
   export default {
     data () {
       return {
-        cards: [
-          { title: 'Pre-fab homes', src: '/static/doc-images/cards/house.jpg', flex: 6 },
-          { title: 'Favorite road trips', src: '/static/doc-images/cards/road.jpg', flex: 6 },
-          { title: 'Best airlines', src: '/static/doc-images/cards/plane.jpg', flex: 6 }],
+        cards: [{ title: 'Pre-fab homes', src: '/static/doc-images/cards/house.jpg'}],
         posts: []
       }
     },
@@ -82,13 +63,6 @@
       }
     },
     watch: {
-      // getPosts () {
-      //   let postsRef = db.ref('Posts/').orderByKey().limitToLast(100)
-      //   postsRef.on('child_added', snapshot => {
-      //     let note = {text: snapshot.val(), id: snapshot.id}
-      //     this.snapshot = [note].concat(this.snapshot)
-      //   })
-      // },
       error (value) {
         if (value) {
           this.alert = true
