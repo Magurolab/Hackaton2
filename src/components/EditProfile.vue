@@ -1,10 +1,10 @@
 <template>
   <v-container fluid>
     <v-layout row wrap>
-
       <v-flex xs12 class="text-xs-center" mt-5>
         <h1>Edit Profile</h1>
-
+      </v-flex>
+      <v-flex xs12 sm6 offset-sm3 mt-3>
       <form @submit.prevent="userEdit">
         <v-layout column>
           <v-flex>
@@ -46,11 +46,6 @@
         </v-layout>
       </form>
       </v-flex>
-      <v-flex xs12 class="text-xs-center" mt-3>
-        <p>This is an account setting.</p>
-      </v-flex>
-
-
     </v-layout>
   </v-container>
 </template>

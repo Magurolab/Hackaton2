@@ -4,11 +4,11 @@
       <v-container v-bind="{ [`grid-list-lg`]: true }" fluid >
         <v-layout row wrap>
           <v-flex
-            v-for="n in 24"
-            :key="n"
+            v-for=" card in cards"
+            :key="card"
             xs12 sm6  md3 lg3  >
             <v-card-media
-              :src= "`https://unsplash.it/300/300?image=${Math.floor(Math.random() * 100) + 1}`"
+              :src= "card.url"
               height="300px"
             >
             </v-card-media>
@@ -36,8 +36,7 @@
   export default {
     data () {
       return {
-        cards: [{ title: 'Pre-fab homes', src: '/static/doc-images/cards/house.jpg'}],
-        posts: []
+        hello:[]
       }
     },
     components: {
@@ -49,6 +48,10 @@
       },
       loading () {
         return this.$store.state.loading
+      },
+      cards () {
+        console.log(this.$store.getters.getCards)
+        return this.$store.getters.getCards
       }
     },
     methods: {
@@ -57,10 +60,16 @@
     beforeMount () {
       // this.getAllPosts()
       this.$store.dispatch('loadCards')
-
-      while (this.$store.state.cards === null) { // you can delete this loop na
-        console.log(this.$store.state.cards)
-      }
+      // var i = 0
+      // while (i < 30) { // you can delete this loop na
+      //   console.log(this.$store.state.cards)
+      //   i += 1
+      // }
+      // console.log('helloooooo')
+      // console.log(this.$store.state.cards.length)
+      // for (i = 0; i < this.$store.state.cards.length; i += 1) {
+      //   console.log(this.$store.state.cards[i])
+      // }
     },
     watch: {
       error (value) {

@@ -1,9 +1,8 @@
 <template>
   <v-container fluid>
     <v-layout row wrap>
-
       <v-flex xs12 class="text-xs-center" mt-5>
-        <h1>Add items</h1>
+        <h1>Add item</h1>
       </v-flex>
       <v-flex xs12 class="text-xs-center" mt-5>
         <img v-bind:src=image height="300px" width="300px"/>
@@ -20,15 +19,6 @@
               <p>My File Selector: <file-select v-model="file"></file-select></p>
               <p v-if="file">{{file.name}}</p>
             </v-flex>
-            <v-flex xs6 sm3>
-              <v-text-field
-                name="image"
-                label="Image Source"
-                id="image"
-                v-model="image"
-              ></v-text-field>
-              For image, please upload your
-           </v-flex>
             <v-flex>
               <v-text-field
                 name="name"
@@ -38,17 +28,16 @@
                 v-model="name"
                 required></v-text-field>
             </v-flex>
-            <v-flex>
+            <v-flex xs6 sm3>
               <v-text-field
                 name="description"
                 label="Description"
                 id="description"
                 type="text"
                 v-model="description"
-                full-width
                 multi-line></v-text-field>
             </v-flex>
-            <v-flex>
+            <v-flex xs6 sm3>
               <v-text-field
                 name="price"
                 label="Price"
@@ -58,7 +47,7 @@
                 v-model="price"
               ></v-text-field>
             </v-flex>
-            <v-flex xs6>
+            <v-flex xs6 >
               <v-select
                 name="category"
                 label="Category"
@@ -68,8 +57,7 @@
                 v-model="category"
               ></v-select>
             </v-flex>
-
-            <v-flex class="text-xs-center" mt-5>
+            <v-flex class="text-xs-right" mt-5>
               <v-btn color="primary" type="submit" :disabled="loading">Sell It</v-btn>
             </v-flex>
           </v-layout>
