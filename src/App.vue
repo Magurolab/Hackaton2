@@ -49,7 +49,7 @@
       <!--<v-container fluid fill-height class="grey lighten-4">-->
       <!--</v-container>-->
     </v-content>
-    <v-footer class="cyan white--text pa-5">
+    <v-footer class="primary white--text pa-5">
       <v-spacer></v-spacer>
       <div>&copy; {{ new Date().getFullYear() }}</div>
     </v-footer>

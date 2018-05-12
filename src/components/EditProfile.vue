@@ -40,8 +40,8 @@
               v-model="description"
             ></v-text-field>
           </v-flex>
-          <v-flex class="text-xs-center" mt-5>
-            <v-btn color="primary" type="submit">submit</v-btn>
+          <v-flex class="text-xs-right" mt-5>
+            <v-btn color="primary" type="submit">update</v-btn>
           </v-flex>
         </v-layout>
       </form>
