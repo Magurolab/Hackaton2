@@ -8,6 +8,7 @@ Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   state: {
+    cards: [],
     appTitle: 'My Awesome App',
     user: null,
     error: null,
@@ -16,6 +17,10 @@ export const store = new Vuex.Store({
     uid: null
   },
   mutations: {
+    setLoadedCards (state, payload) {
+      state.cards = payload
+      console.log(state.cards)
+    },
     setUser (state, payload) {
       state.user = payload
     },
@@ -27,6 +32,34 @@ export const store = new Vuex.Store({
     }
   },
   actions: {
+    loadCards ({commit}) {
+      commit('setLoading', true)
+      firebase.database().ref('/Posts/').once('value')
+        .then((data) => {
+          const tmp = []
+          const postObject = data.val()
+          for (let key in postObject) {
+            tmp.push({
+              id: key,
+              category: postObject[key].category,
+              description: postObject[key].description,
+              name: postObject[key].name,
+              price: postObject[key].price,
+              url: postObject[key].url,
+              user: postObject[key].user
+            })
+          }
+          // console.log(tmp)
+          commit('setLoadedCards', tmp)
+          commit('setLoading', false)
+        })
+        .catch(
+          (error) => {
+            console.log(error)
+            commit('setLoading', false)
+          }
+        )
+    },
     userSignUp ({commit}, payload) {
       commit('setLoading', true)
       firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
@@ -152,6 +185,9 @@ export const store = new Vuex.Store({
       })
       state.loading = false
       return state.database
+    },
+    getCards (state) {
+      return state.cards
     }
   }
 })
