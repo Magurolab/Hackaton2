@@ -1,7 +1,7 @@
 <template>
   <v-flex xs12>
     <v-card>
-      <v-container v-bind="{ [`grid-list-sm`]: true }" fluid >
+      <v-container v-bind="{ [`grid-list-lg`]: true }" fluid >
         <v-layout row wrap>
           <v-flex
             v-for="n in 24"
