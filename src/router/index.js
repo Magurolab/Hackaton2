@@ -10,7 +10,7 @@ import EditProfile from '@/components/EditProfile'
 import AddItem from '@/components/AddItem'
 import Wishlist from '@/components/Wishlist'
 import Items from '@/components/Items'
-
+import Item from '@/components/Item'
 
 Vue.use(Router)
 
@@ -58,11 +58,6 @@ export default new Router({
       beforeEnter: AuthGuard
     },
     {
-      path: '*',
-      name: 'NotFound',
-      component: NotFound
-    },
-    {
       path: '/edit-profile',
       name: 'EditProfile',
       component: EditProfile,
@@ -81,8 +76,21 @@ export default new Router({
     },
     {
       path: '/items',
+      name: 'Items',
       component: Items,
       beforeEnter: AuthGuard
+    },
+    {
+      path: '/items/:id',
+      props: true,
+      name: 'Item',
+      component: Item,
+      beforeEnter: AuthGuard
+    },
+    {
+      path: '*',
+      name: 'NotFound',
+      component: NotFound
     }
   ],
   mode: 'history'

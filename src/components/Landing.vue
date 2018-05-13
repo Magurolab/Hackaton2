@@ -46,12 +46,13 @@
         >
           <v-flex xs12 sm4 class="my-3">
             <div class="text-xs-center">
-              <h2 class="headline">NEW PRODUCTS</h2>
+              <h2 class="headline">The best way to start developing</h2>
               <span class="subheading">
                 Cras facilisis mi vitae nunc
               </span>
             </div>
           </v-flex>
+
           <v-flex xs12>
             <v-container grid-list-xl>
               <v-layout row wrap align-center>
@@ -102,6 +103,49 @@
                 </v-flex>
               </v-layout>
             </v-container>
+          </v-flex>
+        </v-layout>
+      </section>
+
+      <section>
+        <v-layout  column
+                   wrap
+                   align-center>
+          <v-flex xs12>
+            <v-card >
+              <v-container v-bind="{ [`grid-list-lg`]: true }" fluid>
+                <v-layout row wrap>
+                  <v-flex
+                    v-for=" item in items"
+                    :key="item.id"
+                    @click="onLoadItem(id)"
+                    xs12 sm6  md3 lg3>
+                    <!--<v-card-media-->
+                      <!--:src= "item.url"-->
+                      <!--height="300px"-->
+                      <!--style="cursor: pointer"-->
+                    <!--&gt;-->
+                      <!--&lt;!&ndash;<div  xs12 align-end flexbox>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<h3 class="title"> {{item.name}}</h3>&ndash;&gt;-->
+                      <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                      <!---->
+                    <!--</v-card-media>-->
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <div>
+                        {{'฿ ' + item.price}}
+                      </div>
+                      <v-btn icon :to="'/items/' + item.id">
+                        <v-icon>favorite</v-icon>
+                      </v-btn>
+                      <v-btn icon>
+                        <v-icon>bookmark</v-icon>
+                      </v-btn>
+                    </v-card-actions>
+                  </v-flex>
+                </v-layout>
+              </v-container>
+            </v-card>
           </v-flex>
         </v-layout>
       </section>
@@ -182,5 +226,19 @@
 </template>
 
 <script>
-export default {}
+export default {
+  method: {
+    beforeMount () {
+      this.$store.dispatch('loadCards')
+    }
+  },
+  computed: {
+    // items () {
+    //   return this.$store.getters.featuredItems
+    // }
+    items () {
+      return this.$store.getters.getCards
+    }
+  }
+}
 </script>

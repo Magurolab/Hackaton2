@@ -28,14 +28,15 @@
                 v-model="name"
                 required></v-text-field>
             </v-flex>
-            <v-flex xs6 sm3>
-              <v-text-field
-                name="description"
-                label="Description"
-                id="description"
-                type="text"
-                v-model="description"
-                multi-line></v-text-field>
+            <v-flex xs6 >
+              <v-select
+                name="category"
+                label="Category"
+                id="university"
+                :items="categories"
+                single-line
+                v-model="category"
+              ></v-select>
             </v-flex>
             <v-flex xs6 sm3>
               <v-text-field
@@ -47,15 +48,14 @@
                 v-model="price"
               ></v-text-field>
             </v-flex>
-            <v-flex xs6 >
-              <v-select
-                name="category"
-                label="Category"
-                id="university"
-                :items="categories"
-                single-line
-                v-model="category"
-              ></v-select>
+            <v-flex xs6 sm3>
+              <v-text-field
+                name="description"
+                label="Description"
+                id="description"
+                type="text"
+                v-model="description"
+                multi-line></v-text-field>
             </v-flex>
             <v-flex class="text-xs-right" mt-5>
               <v-btn color="primary" type="submit" :disabled="loading">Sell It</v-btn>
@@ -96,7 +96,14 @@
     },
     methods: {
       addItem () {
-        this.$store.dispatch('addItem', {name: this.name, description: this.description, price: this.price, category: this.category, file: this.file})
+        const itemData = {
+          name: this.name,
+          description: this.description,
+          price: this.price,
+          category: this.category,
+          file: this.file
+        }
+        this.$store.dispatch('addItem', itemData)
       }
     },
     watch: {

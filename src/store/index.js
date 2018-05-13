@@ -169,7 +169,6 @@ export const store = new Vuex.Store({
     isAuthenticated (state) {
       return state.user !== null && state.user !== undefined
     },
-
     getEmail () {
       return auth.currentUser.email
     },
@@ -188,6 +187,16 @@ export const store = new Vuex.Store({
     },
     getCards (state) {
       return state.cards
+    },
+    getCard (state) {
+      return (itemId) => {
+        return state.getCards.find((item) => {
+          return item.id === itemId
+        })
+      }
+    },
+    featuredItems (state, getters) {
+      return getters.getCards
     }
   }
 })
