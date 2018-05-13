@@ -58,7 +58,7 @@
                 multi-line></v-text-field>
             </v-flex>
             <v-flex class="text-xs-right" mt-5>
-              <v-btn color="primary" type="submit" :disabled="loading">Sell It</v-btn>
+              <v-btn color="primary" type="submit"  :disabled="!formIsValid">Sell It</v-btn>
             </v-flex>
           </v-layout>
         </form>
@@ -92,6 +92,12 @@
       },
       loading () {
         return this.$store.state.loading
+      },
+      formIsValid () {
+        return this.name !== '' &&
+          this.description !== '' &&
+          this.price !== '' &&
+          this.category !== ''
       }
     },
     methods: {
