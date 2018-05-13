@@ -6,7 +6,7 @@
             <v-flex
               v-for=" card in cards"
               :key="card.id"
-              @click="onLoadItem(id)"
+              @click="onLoadItem(card.id)"
               xs12 sm6  md3 lg3 mt-3 >
               <v-card-media
                 :src= "card.url"

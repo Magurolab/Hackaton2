@@ -49,7 +49,7 @@ export const store = new Vuex.Store({
               user: postObject[key].user
             })
           }
-          // console.log(tmp)
+          console.log('category: ' + tmp.price)
           commit('setLoadedCards', tmp)
           commit('setLoading', false)
         })
@@ -152,7 +152,8 @@ export const store = new Vuex.Store({
           price: payload.price,
           category: payload.category,
           user: uid,
-          url: ''
+          url: '',
+          id: postKey
         }
         uploadTask.snapshot.ref.getDownloadURL().then(url => {
           db.ref('Posts/' + postKey + '/url').set(url)
@@ -162,7 +163,7 @@ export const store = new Vuex.Store({
         // console.log('File available at', downloadURL)
       })
       commit('setLoading', false)
-      router.push('/home')
+      router.push('/items')
     }
   },
   getters: {
@@ -176,11 +177,8 @@ export const store = new Vuex.Store({
       state.loading = true
       const uid = auth.currentUser.uid
       const ref = db.ref('Users/' + uid + '/university')
-      // var university = null
       ref.on('value', function (snapshot) {
         state.database = (snapshot.val())
-        // console.log(store.state.database)
-        // console.log(university)
       })
       state.loading = false
       return state.database
@@ -189,10 +187,14 @@ export const store = new Vuex.Store({
       return state.cards
     },
     getCard (state) {
+      state.loading = true
       return (itemId) => {
-        return state.getCards.find((item) => {
-          return item.id === itemId
+        const ref = db.ref('Posts/' + itemId)
+        ref.on('value', function (snapshot) {
+          state.database = (snapshot.val())
         })
+        state.loading = false
+        return state.database
       }
     },
     featuredItems (state, getters) {
