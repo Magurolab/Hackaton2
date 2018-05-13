@@ -1,35 +1,40 @@
 <template>
-  <v-flex xs12>
-    <v-card>
-      <v-container v-bind="{ [`grid-list-lg`]: true }" fluid >
-        <v-layout row wrap>
-          <v-flex
-            v-for=" card in cards"
-            :key="card"
-            xs12 sm6  md3 lg3  >
-            <v-card-media
-              :src= "card.url"
-              height="300px"
-            >
-            </v-card-media>
-            <v-card-actions>
-            <v-spacer></v-spacer>
-              <v-btn icon>
-              <v-icon>favorite</v-icon>
-              </v-btn>
-              <v-btn icon>
-              <v-icon>bookmark</v-icon>
-              </v-btn>
-              <v-btn icon>
-              <v-icon>share</v-icon>
-              </v-btn>
-            </v-card-actions>
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-card>
-  </v-flex>
-
+    <v-flex xs12>
+      <v-card >
+        <v-container v-bind="{ [`grid-list-lg`]: true }" fluid>
+          <v-layout row wrap>
+            <v-flex
+              v-for=" card in cards"
+              :key="card"
+              xs12 sm6  md3 lg3 mt-3 >
+              <v-card-media
+                :src= "card.url"
+                height="300px"
+              >
+              </v-card-media>
+              <v-card-text>
+                <div>
+                  <h3 class="headline mb-0"> {{card.name}}</h3>
+                  <!--<div> {{card.description}} </div>-->
+                </div>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn icon>
+                  <v-icon>favorite</v-icon>
+                </v-btn>
+                <v-btn icon>
+                  <v-icon>bookmark</v-icon>
+                </v-btn>
+                <v-btn icon>
+                  <v-icon>share</v-icon>
+                </v-btn>
+              </v-card-actions>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-card>
+    </v-flex>
 </template>
 <script>
   import { auth, db } from '../firebase'

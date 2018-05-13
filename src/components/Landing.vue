@@ -46,7 +46,7 @@
         >
           <v-flex xs12 sm4 class="my-3">
             <div class="text-xs-center">
-              <h2 class="headline">The best way to start developing</h2>
+              <h2 class="headline">NEW PRODUCTS</h2>
               <span class="subheading">
                 Cras facilisis mi vitae nunc
               </span>
