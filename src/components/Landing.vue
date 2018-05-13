@@ -11,11 +11,6 @@
           <!--with Google Firebase authentication-->
         <!--</blockquote>-->
       <!--</v-flex>-->
-      <!--<v-flex xs12 sm6 offset-sm3 mt-3 class="text-xs-center" mt-5>-->
-        <!--<v-btn color="primary" to="/signup">Sign Up</v-btn>-->
-        <!--<v-btn to="/signin">Sign In</v-btn>-->
-
-      <!--</v-flex>-->
     <!--</v-layout>-->
   <!--</v-parallax>-->
     <v-content>
@@ -116,14 +111,13 @@
           <v-layout column align-center justify-center>
             <div class="headline white--text mb-3 text-xs-center">Web development has never been easier</div>
             <em>Kick-start your application today</em>
-            <v-btn
-              class="blue lighten-2 mt-5"
-              dark
-              large
-              href="/pre-made-themes"
-            >
-              Get Started
-            </v-btn>
+
+
+            <v-flex xs12 sm6 mt-5 class="text-xs-center">
+              <v-btn color="primary" to="/signup">Sign Up</v-btn>
+              <v-btn to="/signin">Sign In</v-btn>
+            </v-flex>
+
           </v-layout>
         </v-parallax>
       </section>
@@ -182,7 +176,7 @@
           </v-layout>
         </v-container>
       </section>
-      
+
     </v-content>
   </v-container>
 </template>
