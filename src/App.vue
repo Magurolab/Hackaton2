@@ -63,7 +63,7 @@
       items: [
         { icon: 'home', text: 'Home', path: '/home' },
         { icon: 'assignment_ind', text: 'Edit Profile', path: '/edit-profile' },
-        { icon: 'add_shopping_cart', text: 'Buy', path: '/buy' },
+        { icon: 'add_shopping_cart', text: 'Buy', path: '/items' },
         { icon: 'attach_money', text: 'Sell', path: '/add-item' },
         { icon: 'bookmark_border', text: 'Wishlist', path: '/Wishlist' }
         // { divider: true },

@@ -9,7 +9,8 @@ import Signin from '@/components/Signin'
 import EditProfile from '@/components/EditProfile'
 import AddItem from '@/components/AddItem'
 import Wishlist from '@/components/Wishlist'
-import Buy from '@/components/Buy'
+import Items from '@/components/Items'
+
 
 Vue.use(Router)
 
@@ -79,8 +80,8 @@ export default new Router({
       beforeEnter: AuthGuard
     },
     {
-      path: '/buy',
-      component: Buy,
+      path: '/items',
+      component: Items,
       beforeEnter: AuthGuard
     }
   ],

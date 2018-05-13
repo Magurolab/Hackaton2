@@ -11,15 +11,23 @@
                 :src= "card.url"
                 height="300px"
               >
-              </v-card-media>
-              <v-card-text>
-                <div>
-                  <h3 class="headline mb-0"> {{card.name}}</h3>
+                <div  xs12 align-end flexbox>
+                  <h3 class="title"> {{card.name}}</h3>
                   <!--<div> {{card.description}} </div>-->
                 </div>
-              </v-card-text>
+
+              </v-card-media>
+              <!--<v-card-text>-->
+                <!--<div>-->
+                  <!--<h3 class="headline mb-0"> {{card.name}}</h3>-->
+                  <!--&lt;!&ndash;<div> {{card.description}} </div>&ndash;&gt;-->
+                <!--</div>-->
+              <!--</v-card-text>-->
               <v-card-actions>
                 <v-spacer></v-spacer>
+                <div>
+                  {{'฿ ' + card.price}}
+                </div>
                 <v-btn icon>
                   <v-icon>favorite</v-icon>
                 </v-btn>
@@ -36,12 +44,12 @@
       </v-card>
     </v-flex>
 </template>
+
 <script>
   import { auth, db } from '../firebase'
   export default {
     data () {
       return {
-        hello:[]
       }
     },
     components: {
@@ -63,18 +71,7 @@
       // not now
     },
     beforeMount () {
-      // this.getAllPosts()
       this.$store.dispatch('loadCards')
-      // var i = 0
-      // while (i < 30) { // you can delete this loop na
-      //   console.log(this.$store.state.cards)
-      //   i += 1
-      // }
-      // console.log('helloooooo')
-      // console.log(this.$store.state.cards.length)
-      // for (i = 0; i < this.$store.state.cards.length; i += 1) {
-      //   console.log(this.$store.state.cards[i])
-      // }
     },
     watch: {
       error (value) {
@@ -90,3 +87,15 @@
     }
   }
 </script>
+
+<style scoped>
+  .title {
+    position: absolute;
+    bottom: 5px;
+    /*background-color: rgba(0,0,0,0.5);*/
+    color: white;
+    font-size: 2em;
+    margin-left: 5px;
+  }
+</style>
+
