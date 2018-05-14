@@ -6,12 +6,12 @@
             <v-flex
               v-for=" card in cards"
               :key="card.id"
-              @click="onLoadItem(card.id)"
               xs12 sm6  md3 lg3 mt-3 >
               <v-card-media
                 :src= "card.url"
                 height="300px"
                 style="cursor: pointer"
+                @click="onLoadItem(card.id)"
               >
                 <div  xs12 align-end flexbox>
                   <h3 class="title"> {{card.name}}</h3>
@@ -22,7 +22,7 @@
                 <div>
                   {{'฿ ' + card.price}}
                 </div>
-                <v-btn icon :to="'/items/' + card.id">
+                <v-btn icon>
                   <v-icon>favorite</v-icon>
                 </v-btn>
                 <v-btn icon>
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-  import { auth, db } from '../firebase'
+  import { auth, db } from '../../firebase'
   export default {
     components: {
       auth, db

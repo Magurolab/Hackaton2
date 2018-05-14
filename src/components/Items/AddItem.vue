@@ -69,7 +69,7 @@
 </template>
 
 <script>
-  import FileSelect from './FileSelect.vue'
+  import FileSelect from '../FileSelect.vue'
   export default {
     data () {
       return {

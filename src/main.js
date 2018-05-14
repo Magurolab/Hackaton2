@@ -9,7 +9,7 @@ import firebase from './firebase'
 /* eslint-disable */
 Vue.use(Vuetify, {
   theme: {
-    primary: "#0097A7",
+    primary: "#AD1457",
     secondary: "#e57373",
     accent: "#9c27b0",
     error: "#f44336",

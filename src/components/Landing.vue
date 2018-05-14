@@ -107,47 +107,62 @@
         </v-layout>
       </section>
 
-      <section>
-        <v-layout  column
-                   wrap
-                   align-center>
-          <v-flex xs12>
-            <v-card >
-              <v-container v-bind="{ [`grid-list-lg`]: true }" fluid>
-                <v-layout row wrap>
-                  <v-flex
-                    v-for=" item in items"
-                    :key="item.id"
-                    @click="onLoadItem(id)"
-                    xs12 sm6  md3 lg3>
+      <!--<section>-->
+        <!--<v-layout >-->
+          <!--<v-flex xs12>-->
+            <!--<v-card  xs12 sm6  md3 lg3>-->
+              <!--<v-container v-bind="{ [`grid-list-lg`]: true }">-->
+                <!--<v-layout row wrap>-->
+                  <!--<v-flex-->
+                    <!--v-for=" item in items"-->
+                    <!--:key="item.id"-->
+                    <!--@click="onLoadItem(id)"-->
+                    <!--&gt;-->
                     <!--<v-card-media-->
                       <!--:src= "item.url"-->
                       <!--height="300px"-->
                       <!--style="cursor: pointer"-->
                     <!--&gt;-->
-                      <!--&lt;!&ndash;<div  xs12 align-end flexbox>&ndash;&gt;-->
-                        <!--&lt;!&ndash;<h3 class="title"> {{item.name}}</h3>&ndash;&gt;-->
-                      <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                      <!---->
+                      <!--<div  xs12 align-end flexbox>-->
+                        <!--<h3 class="title"> {{item.name}}</h3>-->
+                      <!--</div>-->
+
                     <!--</v-card-media>-->
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <div>
-                        {{'฿ ' + item.price}}
-                      </div>
-                      <v-btn icon :to="'/items/' + item.id">
-                        <v-icon>favorite</v-icon>
-                      </v-btn>
-                      <v-btn icon>
-                        <v-icon>bookmark</v-icon>
-                      </v-btn>
-                    </v-card-actions>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-card>
+                    <!--<v-card-actions>-->
+                      <!--<v-spacer></v-spacer>-->
+                      <!--<div>-->
+                        <!--{{'฿ ' + item.price}}-->
+                      <!--</div>-->
+                      <!--<v-btn icon :to="'/items/' + item.id">-->
+                        <!--<v-icon>favorite</v-icon>-->
+                      <!--</v-btn>-->
+                      <!--<v-btn icon>-->
+                        <!--<v-icon>bookmark</v-icon>-->
+                      <!--</v-btn>-->
+                    <!--</v-card-actions>-->
+                  <!--</v-flex>-->
+                <!--</v-layout>-->
+              <!--</v-container>-->
+            <!--</v-card>-->
+          <!--</v-flex>-->
+        <!--</v-layout>-->
+      <!--</section>-->
+
+      <section>
+        <v-layout>
+          <v-flex
+            v-for=" item in items"
+            :key="item.id"
+            @click="onLoadItem(id)"
+            xs12 sm6  md3 lg3
+          >
+            <div class="black--text">
+             <p>kjsdjkskjskjsk</p>
+            </div>
           </v-flex>
         </v-layout>
+
+
       </section>
 
       <section>
@@ -230,13 +245,23 @@ export default {
   method: {
     beforeMount () {
       this.$store.dispatch('loadCards')
+    },
+    onLoadItem (id) {
+      this.$router.push('/items/' + id)
     }
   },
   computed: {
     // items () {
     //   return this.$store.getters.featuredItems
     // }
+    error () {
+      return this.$store.state.error
+    },
+    loading () {
+      return this.$store.state.loading
+    },
     items () {
+      console.log(this.$store.getters.getCards)
       return this.$store.getters.getCards
     }
   }

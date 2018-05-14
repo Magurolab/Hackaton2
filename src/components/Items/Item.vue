@@ -8,12 +8,18 @@
           </v-card-title>
           <v-card-media
             :src="item.url"
-            height="300px"
+            height="500px"
           >
           </v-card-media>
           <v-card-text>
             {{item.description}}}
           </v-card-text>
+          <v-card-actions>
+            <v-btn flat>
+              <v-icon left dark>favorite</v-icon>
+              BUYYY
+            </v-btn>
+          </v-card-actions>
         </v-card>
       </v-flex>
     </v-layout>

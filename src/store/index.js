@@ -152,8 +152,7 @@ export const store = new Vuex.Store({
           price: payload.price,
           category: payload.category,
           user: uid,
-          url: '',
-          id: postKey
+          url: ''
         }
         uploadTask.snapshot.ref.getDownloadURL().then(url => {
           db.ref('Posts/' + postKey + '/url').set(url)
@@ -198,7 +197,7 @@ export const store = new Vuex.Store({
       }
     },
     featuredItems (state, getters) {
-      return getters.getCards
+      return getters.getCards.slice(0, 5)
     }
   }
 })

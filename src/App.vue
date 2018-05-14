@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-toolbar color="cyan lighten-2" app absolute clipped-left dense app >
+    <v-toolbar color="pink darken-1" app absolute clipped-left dense app >
       <v-toolbar-title class="white--text mr-3">Alibaybay</v-toolbar-title>
       <v-text-field
         solo-inverted
@@ -30,8 +30,8 @@
         v-if="isAuthenticated"
         slot="extension"
         centered
-        color="cyan lighten-2"
-        slider-color="teal lighten-1"
+        color="pink darken-1"
+        slider-color="pink lighten-5"
       >
         <v-tab
           v-for="(item,i) in items"
@@ -65,7 +65,8 @@
         { icon: 'assignment_ind', text: 'Edit Profile', path: '/edit-profile' },
         { icon: 'add_shopping_cart', text: 'Buy', path: '/items' },
         { icon: 'attach_money', text: 'Sell', path: '/add-item' },
-        { icon: 'bookmark_border', text: 'Wishlist', path: '/Wishlist' }
+        { icon: 'bookmark_border', text: 'Wishlist', path: '/Wishlist' },
+        { icon: 'inbox', text: 'Inbox', path: '/inbox' }
         // { divider: true },
         // { heading: 'Labels' },
         // { icon: 'add', text: 'Create new label' },
