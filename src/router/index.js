@@ -7,9 +7,12 @@ import NotFound from '@/components/NotFound'
 import Signup from '@/components/Signup'
 import Signin from '@/components/Signin'
 import EditProfile from '@/components/EditProfile'
-import AddItem from '@/components/AddItem'
 import Wishlist from '@/components/Wishlist'
-import Buy from '@/components/Buy'
+import AddItem from '@/components/Items/AddItem'
+import Items from '@/components/Items/Items'
+import Item from '@/components/Items/Item'
+import Inbox from '@/components/Messages/Inbox'
+import SendMessage from '@/components/Messages/SendMessage'
 
 Vue.use(Router)
 
@@ -57,11 +60,6 @@ export default new Router({
       beforeEnter: AuthGuard
     },
     {
-      path: '*',
-      name: 'NotFound',
-      component: NotFound
-    },
-    {
       path: '/edit-profile',
       name: 'EditProfile',
       component: EditProfile,
@@ -79,9 +77,34 @@ export default new Router({
       beforeEnter: AuthGuard
     },
     {
-      path: '/buy',
-      component: Buy,
+      path: '/items',
+      name: 'Items',
+      component: Items,
       beforeEnter: AuthGuard
+    },
+    {
+      path: '/items/:id',
+      props: true,
+      name: 'Item',
+      component: Item,
+      beforeEnter: AuthGuard
+    },
+    {
+      path: '/inbox',
+      name: 'Inbox',
+      component: Inbox,
+      beforeEnter: AuthGuard
+    },
+    {
+      path: '/send-message',
+      name: 'SendMessage',
+      component: SendMessage,
+      beforeEnter: AuthGuard
+    },
+    {
+      path: '*',
+      name: 'NotFound',
+      component: NotFound
     }
   ],
   mode: 'history'
