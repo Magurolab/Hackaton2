@@ -45,9 +45,9 @@
       </v-tabs>
     </v-toolbar>
     <v-content>
-      <v-container fluid fill-height class="grey lighten-4">
-        <router-view></router-view>
-      </v-container>
+      <router-view></router-view>
+      <!--<v-container fluid fill-height class="grey lighten-4">-->
+      <!--</v-container>-->
     </v-content>
   </v-app>
 </template>

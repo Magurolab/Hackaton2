@@ -19,7 +19,7 @@ export const store = new Vuex.Store({
   mutations: {
     setLoadedCards (state, payload) {
       state.cards = payload
-      console.log(state.cards)
+      // console.log(state.cards)
     },
     setUser (state, payload) {
       state.user = payload
@@ -49,7 +49,7 @@ export const store = new Vuex.Store({
               user: postObject[key].user
             })
           }
-          // console.log(tmp)
+          console.log(tmp)
           commit('setLoadedCards', tmp)
           commit('setLoading', false)
         })
