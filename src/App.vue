@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
-    <v-toolbar color="amber" app absolute clipped-left app>
-      <span class="title ml-3 mr-5">Alibaybay</span>
+    <v-toolbar color="cyan lighten-2" app absolute clipped-left dense app >
+      <v-toolbar-title class="white--text mr-3">Alibaybay</v-toolbar-title>
       <v-text-field
         solo-inverted
         flat
@@ -9,7 +9,7 @@
         prepend-icon="search"
       ></v-text-field>
       <v-spacer></v-spacer>
-      <v-toolbar-items class="hidden-xs-only">
+      <v-toolbar-items >
         <v-btn
           flat
           v-for="item in menuItems"
@@ -20,7 +20,7 @@
           {{ item.title }}
         </v-btn>
         <v-btn flat @click="userSignOut" v-if="isAuthenticated">
-          <v-icon left>exit_to_app</v-icon>
+          <v-icon left >exit_to_app</v-icon>
           Sign Out
         </v-btn>
       </v-toolbar-items>
@@ -30,8 +30,8 @@
         v-if="isAuthenticated"
         slot="extension"
         centered
-        color="grey"
-        slider-color="brown"
+        color="cyan lighten-2"
+        slider-color="teal lighten-1"
       >
         <v-tab
           v-for="(item,i) in items"
@@ -49,6 +49,10 @@
       <!--<v-container fluid fill-height class="grey lighten-4">-->
       <!--</v-container>-->
     </v-content>
+    <v-footer class="primary white--text pa-5">
+      <v-spacer></v-spacer>
+      <div>&copy; {{ new Date().getFullYear() }}</div>
+    </v-footer>
   </v-app>
 </template>
 

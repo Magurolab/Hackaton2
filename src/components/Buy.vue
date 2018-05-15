@@ -52,7 +52,64 @@
   </v-layout>
 </template>
 <script>
+  import { auth, db } from '../firebase'
   export default {
+<<<<<<<<< Temporary merge branch 1
+    data () {
+      return {
+        cards: [
+          { title: 'Pre-fab homes', src: '/static/doc-images/cards/house.jpg', flex: 6 },
+          { title: 'Favorite road trips', src: '/static/doc-images/cards/road.jpg', flex: 6 },
+          { title: 'Best airlines', src: '/static/doc-images/cards/plane.jpg', flex: 6 }],
+        posts: []
+      }
+    },
+    components: {
+      auth, db
+    },
+    computed: {
+      error () {
+        return this.$store.state.error
+      },
+      loading () {
+        return this.$store.state.loading
+      }
+    },
+    methods: {
+      // not now
+    },
+    beforeMount () {
+      // this.getAllPosts()
+      this.$store.dispatch('loadCards')
+      var i = 0
+      while (i < 1000) { // you can delete this loop na
+        console.log(this.$store.state.cards)
+        i += 1
+        if (i === 1000) {
+          break
+        }
+      }
+    },
+    watch: {
+      // getPosts () {
+      //   let postsRef = db.ref('Posts/').orderByKey().limitToLast(100)
+      //   postsRef.on('child_added', snapshot => {
+      //     let note = {text: snapshot.val(), id: snapshot.id}
+      //     this.snapshot = [note].concat(this.snapshot)
+      //   })
+      // },
+      error (value) {
+        if (value) {
+          this.alert = true
+        }
+      },
+      alert (value) {
+        if (!value) {
+          this.$store.commit('setError', null)
+        }
+      }
+    }
+=========
     data: () => ({
       cards: [
         { title: 'Pre-fab homes', src: '/static/doc-images/cards/house.jpg'},
@@ -65,5 +122,6 @@
         // { title: 'Best airlines', src: '/static/doc-images/cards/plane.jpg'}
       ]
     })
+>>>>>>>>> Temporary merge branch 2
   }
 </script>

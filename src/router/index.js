@@ -17,7 +17,7 @@ const AuthGuard = (to, from, next) => {
   if (firebase.auth().currentUser) {
     next()
   } else {
-    next('/signin')
+    next('/')
   }
 }
 
@@ -36,7 +36,7 @@ export default new Router({
       path: '/',
       name: 'Landing',
       component: Landing,
-      beforeEnter: AuthGuard
+      beforeEnter: isAuthorized
     },
     {
       path: '/signin',

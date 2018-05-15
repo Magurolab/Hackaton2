@@ -9,7 +9,7 @@ import firebase from './firebase'
 /* eslint-disable */
 Vue.use(Vuetify, {
   theme: {
-    primary: "#f44336",
+    primary: "#0097A7",
     secondary: "#e57373",
     accent: "#9c27b0",
     error: "#f44336",
@@ -31,6 +31,8 @@ const unsubscribe = firebase.auth()
     created () {
       if (firebaseUser) {
         store.dispatch('autoSignIn', firebaseUser)
+        store.dispatch('loadCards')
+
       }
     }
   })
