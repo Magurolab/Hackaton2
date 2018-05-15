@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout row wrap fluid>
-      <v-flex xs12>
+      <v-flex  xs12 >
         <v-card>
           <v-card-title>
             {{item.name}}
