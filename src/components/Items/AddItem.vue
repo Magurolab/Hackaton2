@@ -4,9 +4,6 @@
       <v-flex xs12 class="text-xs-center" mt-5>
         <h1>Add item</h1>
       </v-flex>
-      <v-flex xs12 class="text-xs-center" mt-5>
-        <img v-bind:src=image height="300px" width="300px"/>
-      </v-flex>
       <v-flex xs12 sm6 offset-sm3 mt-3>
         <form @submit.prevent="addItem">
           <v-layout column>

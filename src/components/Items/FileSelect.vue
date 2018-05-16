@@ -1,7 +1,7 @@
 <template>
   <label class="file-select">
     <div class="select-button">
-      <span v-if="value">Selected File: {{value.name}}</span>
+      <span v-if="value">Add a photo: {{value.name}}</span>
       <span v-else>Select File</span>
     </div>
     <input type="file" @change="handleFileChange"/>
@@ -27,7 +27,7 @@
     padding: 1rem;
 
     color: white;
-    background-color: #2EA169;
+    background-color: #e57373;
 
     border-radius: .3rem;
 

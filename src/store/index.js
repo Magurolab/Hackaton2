@@ -103,7 +103,7 @@ export const store = new Vuex.Store({
     userEdit ({commit}, payload) {
       commit('setLoading', true)
       var newData = {
-        description: payload.description,
+        description: payload.description
       }
       // var newPostKey = firebase.database().ref().child('Users').push().key
       var updates = {}
