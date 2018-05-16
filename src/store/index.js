@@ -14,7 +14,8 @@ export const store = new Vuex.Store({
     error: null,
     loading: false,
     database: null,
-    uid: null
+    uid: null,
+    date: new Date()
   },
   mutations: {
     setLoadedCards (state, payload) {
@@ -49,7 +50,6 @@ export const store = new Vuex.Store({
               user: postObject[key].user
             })
           }
-          console.log('category: ' + tmp.price)
           commit('setLoadedCards', tmp)
           commit('setLoading', false)
         })
@@ -162,21 +162,33 @@ export const store = new Vuex.Store({
       commit('setLoading', false)
       router.push('/items')
     },
-    sendMassage ({commit}, payload) {
+    sendMessage ({commit}, payload) {
       console.log('sendMessage na ja')
       commit('setLoading', true)
       const uid = auth.currentUser.uid
-      const sellerId = payload.sellerId
-      var postKey = db.ref('Messages/').push().key
-      // var updates = {}
-      db.ref('Messages/' + uid).child('sent').push()
-        .set({message: payload.message})
-      db.ref('Messages/' + sellerId).child('receive').push()
-        .set({message: payload.message})
-      // db.ref('Messages/' + uid + '/sent').push(postData)
-      // updates['/Posts/' + postKey] = postData
-      // db.ref().update(updates)
-      // console.log('File available at', downloadURL)
+      const currentItem = payload.currentItem
+      const itemId = payload.itemId
+
+      const sentKey = db.ref('Messages/' + uid).child('sent').push(
+        {
+          message: payload.message,
+          receiver: currentItem.user,
+          postId: itemId,
+          date: payload.dateTime
+        }
+      ).key
+      console.log('this key:' + sentKey)
+      db.ref('Messages/' + uid).child('sent').child(sentKey).update({id: sentKey})
+
+      const recKey = db.ref('Messages/' + currentItem.user).child('received').push(
+        {
+          message: payload.message,
+          sender: uid,
+          postId: itemId,
+          date: payload.dateTime
+        }
+      ).key
+      db.ref('Messages/' + currentItem.user).child('received').child(recKey).update({id: recKey})
     }
   },
   getters: {
@@ -210,8 +222,33 @@ export const store = new Vuex.Store({
         return state.database
       }
     },
+    getSentMessage (state) {
+      state.loading = true
+      return (uid) => {
+        const ref = db.ref('Messages/' + uid + '/sent/')
+        ref.on('value', function (snapshot) {
+          state.database = (snapshot.val())
+        })
+        state.loading = false
+        return state.database
+      }
+    },
+    getReceivedMessage (state) {
+      state.loading = true
+      return (uid) => {
+        const ref = db.ref('Messages/' + uid + '/received/')
+        ref.on('value', function (snapshot) {
+          state.database = (snapshot.val())
+        })
+        state.loading = false
+        return state.database
+      }
+    },
     featuredItems (state, getters) {
       return getters.getCards.slice(0, 5)
+    },
+    getDate (state) {
+      return state.date.toLocaleString()
     }
   }
 })

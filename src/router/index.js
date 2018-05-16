@@ -96,8 +96,9 @@ export default new Router({
       beforeEnter: AuthGuard
     },
     {
-      path: '/view-message',
+      path: '/view-message/:id',
       name: 'ViewMessage',
+      props: true,
       component: ViewMessage,
       beforeEnter: AuthGuard
     },
