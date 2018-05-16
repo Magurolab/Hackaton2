@@ -14,25 +14,6 @@
           </v-flex>
           <v-flex>
             <v-text-field
-              name="email"
-              label="Email"
-              id="email"
-              type="email"
-              v-model="email"
-              ></v-text-field>
-          </v-flex>
-          <v-flex xs6>
-            <v-select
-              name="university"
-              label="University"
-              id="university"
-              :items="colleges"
-              single-line
-              v-model="university"
-            ></v-select>
-          </v-flex>
-          <v-flex>
-            <v-text-field
               name="Description"
               label="Description"
               id="description"
@@ -54,9 +35,7 @@
   export default {
     data () {
       return {
-        email: '',
         description: '',
-        university: '',
         colleges: [
           'Mahidol University', 'Kasetsart University', 'Chulalongkorn University', 'Thammasat University',
           'Chiang Mai University', 'Prince of Songkla University', 'Khon Kaen University',
@@ -67,7 +46,7 @@
     },
     methods: {
       userEdit () {
-        this.$store.dispatch('userEdit', { email: this.email, description: this.description, university: this.university })
+        this.$store.dispatch('userEdit', { description: this.description })
       }
     },
     computed: {

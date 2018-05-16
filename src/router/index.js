@@ -12,6 +12,7 @@ import AddItem from '@/components/Items/AddItem'
 import Items from '@/components/Items/Items'
 import Item from '@/components/Items/Item'
 import Inbox from '@/components/Messages/Inbox'
+import ViewMessage from '@/components/Messages/ViewMessage'
 
 Vue.use(Router)
 
@@ -92,6 +93,12 @@ export default new Router({
       path: '/inbox',
       name: 'Inbox',
       component: Inbox,
+      beforeEnter: AuthGuard
+    },
+    {
+      path: '/view-message',
+      name: 'ViewMessage',
+      component: ViewMessage,
       beforeEnter: AuthGuard
     },
     {
