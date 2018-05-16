@@ -5,6 +5,7 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import { store } from './store'
 import firebase from './firebase'
+import VueFire from 'vuefire'
 
 /* eslint-disable */
 Vue.use(Vuetify, {
@@ -18,7 +19,7 @@ Vue.use(Vuetify, {
     success: "#4caf50"
   }
 })
-
+Vue.use(VueFire)
 Vue.config.productionTip = false
 
 const unsubscribe = firebase.auth()

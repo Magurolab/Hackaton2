@@ -2,7 +2,7 @@
   <v-container>
     <v-layout row wrap fluid>
       <v-flex  xs12 >
-        <v-card>
+        <v-card v-if="item">
           <v-card-title>
             {{item.name}}
           </v-card-title>

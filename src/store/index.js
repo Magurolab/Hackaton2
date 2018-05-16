@@ -174,7 +174,7 @@ export const store = new Vuex.Store({
         .set({
           message: payload.message
         })
-      db.ref('Messages/' + uid + '/sent').push(postData)
+      // db.ref('Messages/' + uid + '/sent').push(postData)
       // updates['/Posts/' + postKey] = postData
       // db.ref().update(updates)
       // console.log('File available at', downloadURL)
@@ -195,8 +195,6 @@ export const store = new Vuex.Store({
 
       ref.on('value', function (snapshot) {
         state.database = (snapshot.val())
-
-
       })
       state.loading = false
       return state.database
