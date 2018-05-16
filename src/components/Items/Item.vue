@@ -12,13 +12,10 @@
           >
           </v-card-media>
           <v-card-text>
-            {{item.description}}}
+            {{item.description}}
           </v-card-text>
           <v-card-actions>
-            <v-btn flat>
-              <v-icon left dark>favorite</v-icon>
-              BUYYY
-            </v-btn>
+            <sendMessageDialog> </sendMessageDialog>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -27,6 +24,7 @@
 </template>
 
 <script>
+  import SendMessageDialog from '../Messages/SendMessageDialog'
   export default {
     props: ['id'],
     computed: {
@@ -39,6 +37,9 @@
       loading () {
         return this.$store.state.loading
       }
+    },
+    components: {
+      SendMessageDialog
     }
   }
 </script>
