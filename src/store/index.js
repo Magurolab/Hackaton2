@@ -166,13 +166,14 @@ export const store = new Vuex.Store({
       console.log('sendMessage na ja')
       commit('setLoading', true)
       const uid = auth.currentUser.uid
-      // var postKey = db.ref('Messages/').push().key
+      const sellerId = payload.sellerId
+      var postKey = db.ref('Messages/').push().key
       // var updates = {}
       db.ref('Messages/' + uid).child('sent').push()
-        .set({
-          message: payload.message
-        })
-      db.ref('Messages/' + uid + '/sent').push(postData)
+        .set({message: payload.message})
+      db.ref('Messages/' + sellerId).child('receive').push()
+        .set({message: payload.message})
+      // db.ref('Messages/' + uid + '/sent').push(postData)
       // updates['/Posts/' + postKey] = postData
       // db.ref().update(updates)
       // console.log('File available at', downloadURL)
