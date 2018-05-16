@@ -12,7 +12,6 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12 >
-                  {{seller[1]['.value']}}
                   <v-text-field
                     name="message"
                     label="Message"
@@ -49,26 +48,32 @@
     firebase: function () {
       return {
         seller: {
-          source: db.ref('Users/' + this.sellerId )
+          source: db.ref('Users/' + this.sellerId)
         }
       }
     },
-    props: ['sellerId'],
+    props: ['itemId', 'currentItem'],
     data () {
       return {
         message: '',
         dialog: false,
-        sellerIdState: this.sellerId
+        itemId: this.itemId,
+        currentItemState: this.currentItem
       }
     },
     created: function () {
-      console.log('seller', this.sellerId)
+      console.log('current item:', this.currentItem.name)
+      console.log('current seller:', this.currentItem.user)
+      console.log('current item id:', this.itemId)
     },
     methods: {
       sendMessage () {
+        console.log('MEHHHH')
         const itemData = {
           message: this.message,
-          sellerId: this.userId
+          itemId: this.itemId,
+          currentItem: this.currentItem,
+          dateTime: this.$store.getters.getDate
         }
         this.$store.dispatch('sendMessage', itemData)
         this.dialog = false

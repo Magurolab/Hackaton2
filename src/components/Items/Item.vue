@@ -15,7 +15,7 @@
             {{item.description}}
           </v-card-text>
           <v-card-actions>
-            <sendMessageDialog :sellerId="item.user"> </sendMessageDialog>
+            <sendMessageDialog :itemId="this.id" :currentItem="item"> </sendMessageDialog>
             {{ item.id }}
           </v-card-actions>
         </v-card>
@@ -41,6 +41,9 @@
     },
     components: {
       SendMessageDialog
+    },
+    created: function () {
+      console.log('id: ', this.id)
     }
   }
 </script>

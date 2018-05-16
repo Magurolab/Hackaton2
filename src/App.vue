@@ -67,18 +67,6 @@
         { icon: 'attach_money', text: 'Sell', path: '/add-item' },
         { icon: 'bookmark_border', text: 'Wishlist', path: '/Wishlist' },
         { icon: 'inbox', text: 'Inbox', path: '/inbox' }
-        // { divider: true },
-        // { heading: 'Labels' },
-        // { icon: 'add', text: 'Create new label' },
-        // { divider: true },
-        // { icon: 'archive', text: 'Archive' },
-        // { icon: 'delete', text: 'Trash' },
-        // { divider: true },
-        // { icon: 'settings', text: 'Settings' },
-        // { icon: 'chat_bubble', text: 'Trash' },
-        // { icon: 'help', text: 'Help' },
-        // { icon: 'phonelink', text: 'App downloads' },
-        // { icon: 'keyboard', text: 'Keyboard shortcuts' }
       ]
     }),
     props: {
