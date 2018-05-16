@@ -12,7 +12,7 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12 >
-                  <v-text-field v-bind:value="sellerId" />
+                  {{seller[1]['.value']}}
                   <v-text-field
                     name="message"
                     label="Message"
@@ -41,7 +41,18 @@
 </template>
 
 <script>
+  import { auth, db } from '../../firebase'
   export default {
+    components: {
+      auth, db
+    },
+    firebase: function () {
+      return {
+        seller: {
+          source: db.ref('Users/' + this.sellerId )
+        }
+      }
+    },
     props: ['sellerId'],
     data () {
       return {
