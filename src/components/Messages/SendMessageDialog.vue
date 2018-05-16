@@ -12,6 +12,7 @@
             <v-container grid-list-md>
               <v-layout wrap>
                 <v-flex xs12 >
+                  <v-text-field v-bind:value="sellerId" />
                   <v-text-field
                     name="message"
                     label="Message"
@@ -41,12 +42,16 @@
 
 <script>
   export default {
+    props: ['sellerId'],
     data () {
       return {
         message: '',
-        sellerId: '',
-        dialog: false
+        dialog: false,
+        sellerIdState: this.sellerId
       }
+    },
+    created: function () {
+      console.log('seller', this.sellerId)
     },
     methods: {
       sendMessage () {

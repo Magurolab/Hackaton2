@@ -15,7 +15,8 @@
             {{item.description}}
           </v-card-text>
           <v-card-actions>
-            <sendMessageDialog v-bind:sellerId="item.id"> </sendMessageDialog>
+            <sendMessageDialog :sellerId="item.user"> </sendMessageDialog>
+            {{ item.id }}
           </v-card-actions>
         </v-card>
       </v-flex>
