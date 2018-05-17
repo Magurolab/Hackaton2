@@ -3,20 +3,19 @@
   <v-container fluid>
     <v-layout row wrap>
 
-      <v-flex xs12 class="text-xs-center" mt-5>
-        <h1>Home page</h1>
-      </v-flex>
-      <v-flex xs12 sm6 offset-sm3>
-
+      <v-flex xs12 sm6 offset-sm3 mt-3>
         <v-card >
           <v-card-media src="/static/material.jpg" height="200px">
           </v-card-media>
           <v-card-title primary-title>
             <div>
               <h3 class="headline mb-0">{{this.$store.state.userInfo.username}}</h3>
-              <div>{{this.$store.state.userInfo.email}} </div>
-              <div>{{this.$store.state.userInfo.university}} </div>
-              <div>{{this.$store.state.userInfo.description}} </div>
+
+              <div> <v-icon class="mr-1">mail_outline </v-icon> {{this.$store.state.userInfo.email}} </div>
+              <div> <v-icon class="mr-1">school </v-icon> {{this.$store.state.userInfo.university}} </div>
+              <div> About me:
+                <div> {{this.$store.state.userInfo.description}} </div>
+              </div>
               <v-btn flat color="orange" v-if="this.$store.getters.getUserUniversity==null">Loading</v-btn>
             </div>
           </v-card-title>
