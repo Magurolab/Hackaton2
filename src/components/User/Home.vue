@@ -1,17 +1,12 @@
 <template>
-  <v-container fluid>
-    <!--<v-flex xs12 class="text-xs-center" mt-5 v-if="loading">-->
-      <!--<v-progress-circular :size="70" :width="7" indeterminate color="purple"></v-progress-circular>-->
-    <!--</v-flex>-->
 
+  <v-container fluid>
     <v-layout row wrap>
-              <!--v-if="!loading"-->
+
       <v-flex xs12 class="text-xs-center" mt-5>
         <h1>Home page</h1>
       </v-flex>
       <v-flex xs12 sm6 offset-sm3>
-
-
 
         <v-card >
           <v-card-media src="/static/material.jpg" height="200px">
@@ -61,33 +56,40 @@
           </v-container>
         </v-card>
 
-
     </v-flex>
     </v-layout>
   </v-container>
 </template>
 
+
 <script>
-  import { auth } from '../../firebase'
+  import { auth, db } from '../../firebase'
   export default {
-    data () {
-      return {
-        email: this.$store.state.user.email,
-        university: this.$store.getters.getUserUniversity
-      }
+    components: {
+      auth, db
     },
     computed: {
-      loading () {
-        return this.$store.getters.getUserUniversity == null
-      },
       error () {
         return this.$store.state.error
+      },
+      loading () {
+        return this.$store.state.loading
       },
       cards () {
         return this.$store.getters.getCards.filter(function (u) {
           return u.user === auth.currentUser.uid
         })
       }
+    },
+    methods: {
+      deleteItem (id) {
+        db.ref('Posts/').child(id).remove()
+        this.$store.dispatch('loadCards')
+        this.$router.push('/home')
+      }
+    },
+    beforeMount () {
+      this.$store.dispatch('loadCards')
     },
     watch: {
       error (value) {
@@ -103,3 +105,14 @@
     }
   }
 </script>
+
+<style scoped>
+  .title {
+    position: absolute;
+    bottom: 5px;
+    color: white;
+    font-size: 2em;
+    margin-left: 5px;
+  }
+</style>
+

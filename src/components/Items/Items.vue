@@ -22,10 +22,7 @@
                 <div>
                   {{'฿ ' + card.price}}
                 </div>
-                <v-btn icon>
-                  <v-icon>favorite</v-icon>
-                </v-btn>
-                <v-btn icon>
+                <v-btn icon @click="addWishlist(card)">
                   <v-icon>bookmark</v-icon>
                 </v-btn>
               </v-card-actions>
@@ -58,6 +55,10 @@
     methods: {
       onLoadItem (id) {
         this.$router.push('/items/' + id)
+      },
+      addWishlist (id) {
+        const uid = auth.currentUser.uid
+        db.ref('Users/' + uid + '/wishlist').push(id)
       }
     },
     beforeMount () {
