@@ -4,7 +4,7 @@
       <v-container v-bind="{ [`grid-list-lg`]: true }" fluid>
         <v-layout row wrap>
           <v-flex
-            v-for=" card in this.wishlist"
+            v-for=" card in cards"
             :key="card.id"
             xs12 sm6  md3 lg3 mt-3 >
             <v-card-media
@@ -23,7 +23,7 @@
                 {{'฿ ' + card.price}}
               </div>
               <v-btn icon
-                     @click="deleteItem(card.key)"
+                     @click="deleteItem(card.id)"
               >
                 <v-icon>delete</v-icon>
               </v-btn>
@@ -41,7 +41,8 @@
   export default {
     data () {
       return {
-        wishlist: []
+        wishlist: [],
+        wishlistKey: []
       }
     },
     components: {
@@ -55,8 +56,9 @@
         return this.$store.state.loading
       },
       cards () {
+        const temp = this.wishlist
         return this.$store.getters.getCards.filter(function (u) {
-          return this.wishlist.includes(u)
+          return temp.includes(u.id)
         })
       }
     },
@@ -66,22 +68,17 @@
       },
       deleteItem (id) {
         const uid = auth.currentUser.uid
-        db.ref('/Users/' + uid + '/wishlist').child(id).remove()
+        console.log(id)
+        this.wishlist = []
         db.ref('/Users/' + uid + '/wishlist').once('value')
           .then((data) => {
             const postObject = data.val()
-            this.wishlist = []
             for (let key in postObject) {
-              this.wishlist.push({
-                key: key,
-                id: postObject[key].id,
-                category: postObject[key].category,
-                description: postObject[key].description,
-                name: postObject[key].name,
-                price: postObject[key].price,
-                url: postObject[key].url,
-                user: postObject[key].user
-              })
+              if (postObject[key] === id) {
+                db.ref('/Users/' + uid + '/wishlist').child(key).remove()
+              } else {
+                this.wishlist.push(postObject[key])
+              }
             }
           })
           .catch(
@@ -89,10 +86,7 @@
               console.log(error)
             }
           )
-      },
-      addWishlist (id) {
-        const uid = auth.currentUser.uid
-        db.ref('Users/' + uid + '/wishlist').push(id)
+        this.$store.dispatch('loadCards')
       }
     },
     beforeMount () {
@@ -101,16 +95,8 @@
         .then((data) => {
           const postObject = data.val()
           for (let key in postObject) {
-            this.wishlist.push({
-              key: key,
-              id: postObject[key].id,
-              category: postObject[key].category,
-              description: postObject[key].description,
-              name: postObject[key].name,
-              price: postObject[key].price,
-              url: postObject[key].url,
-              user: postObject[key].user
-            })
+            this.wishlist.push(postObject[key])
+            this.wishlistKey.push(key)
           }
         })
         .catch(
@@ -119,6 +105,7 @@
           }
         )
       this.$store.dispatch('loadCards')
+      this.$router.push('/Wishlist')
     },
     watch: {
       error (value) {
