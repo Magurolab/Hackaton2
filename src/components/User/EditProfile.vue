@@ -47,7 +47,10 @@
         </v-layout>
       </form>
         <v-flex class="text-xs-right" mt-5>
-          <v-btn color="primary" @click="">Forget password</v-btn>
+          <v-btn color="primary" @click="sendVerifyEmail">Verify email</v-btn>
+        </v-flex>
+        <v-flex class="text-xs-right" mt-5>
+          <v-btn color="primary" @click="sendPasswordReset">Password reset</v-btn>
         </v-flex>
       </v-flex>
     </v-layout>
@@ -55,7 +58,11 @@
 </template>
 
 <script>
+  import { auth, db } from '../../firebase'
   export default {
+    components: {
+      auth, db
+    },
     data () {
       return {
         description: this.$store.state.userInfo.description,
@@ -72,6 +79,18 @@
     created: function () {
     },
     methods: {
+      sendPasswordReset () {
+        const email = auth.currentUser.email
+        auth.sendPasswordResetEmail(email).then(function () {
+          alert('Password reset sent to your email')
+        })
+      },
+      sendVerifyEmail () {
+        const user = auth.currentUser
+        user.sendEmailVerification().then(function () {
+          alert('Email verification sent')
+        })
+      },
       userEdit () {
         if (this.username.trim() === '' || this.description.trim() === '') {
           return
