@@ -19,6 +19,7 @@
               id="description"
               type="description"
               v-model="description"
+              multi-line=""
             ></v-text-field>
           </v-flex>
           <v-flex class="text-xs-right" mt-5>
@@ -32,6 +33,7 @@
 </template>
 
 <script>
+  import { auth } from '../../firebase'
   export default {
     data () {
       return {
@@ -44,9 +46,25 @@
         alert: false
       }
     },
+    created: function () {
+      // this.$store.dispatch('loadUser')
+      // console.log('curr user id:', auth.currentUser.uid)
+      // console.log(' user :', this.$store.state.user)
+      // console.log('username :', this.$store.state.user.username)
+      // console.log('description:', this.$store.state.user.description)
+      // console.log('uni:', this.$store.state.user.university)
+      // console.log('email:', this.$store.state.user.email)
+    },
     methods: {
       userEdit () {
-        this.$store.dispatch('userEdit', { description: this.description })
+        if (this.username.trim() === '' || this.description.trim() === '') {
+          return
+        }
+        this.$store.dispatch('userEdit', {
+          username: this.username,
+          university: this.university,
+          description: this.description
+        })
       }
     },
     computed: {

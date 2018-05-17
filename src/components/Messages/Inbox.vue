@@ -1,23 +1,8 @@
 <template>
-  <!--<v-container>-->
-    <!--<v-layout row wrap fluid>-->
-      <!--<v-flex xs12>-->
-        <!--<h1> Inbox</h1>-->
-        <!--<p>-->
-          <!--Received Messages-->
-          <!--<v-spacer></v-spacer>-->
-          <!--Sent message-->
-        <!--</p>-->
-      <!--</v-flex>-->
-    <!--</v-layout>-->
-  <!--</v-container>-->
-
-  <v-layout row>
-    <v-flex xs12 sm6 offset-sm3 mt-3>
+  <v-layout column>
+    <v-flex xs12 sm6 mt-3>
       <v-card>
-
         <v-subheader> Received Messages</v-subheader>
-
         <v-list two-line>
           <template v-for="(rec, index) in receivedMessage ">
             <v-list-tile :key="index"
@@ -28,14 +13,18 @@
                 <v-list-tile-title> Username </v-list-tile-title>
                 <v-list-tile-sub-title class="text--primary">{{ rec.date }}</v-list-tile-sub-title>
                 <v-list-tile-sub-title class="text--primary">{{ rec.message }}</v-list-tile-sub-title>
+                <v-list-tile-sub-title class="text--primary">{{ rec.id }}</v-list-tile-sub-title>
               </v-list-tile-content>
             </v-list-tile>
             <v-divider ></v-divider>
           </template>
         </v-list>
+      </v-card>
+    </v-flex>
 
+    <v-flex  xs12 sm6 mt-2>
+      <v-card>
         <v-subheader> Sent Messages</v-subheader>
-
         <v-list two-line>
           <template v-for="(sent, index) in sentMessage">
             <v-list-tile :key="index"
@@ -45,13 +34,12 @@
                 <v-list-tile-title> Username </v-list-tile-title>
                 <v-list-tile-sub-title class="text--primary">{{ sent.date }}</v-list-tile-sub-title>
                 <v-list-tile-sub-title class="text--primary">{{ sent.message }}</v-list-tile-sub-title>
+                <v-list-tile-sub-title class="text--primary">{{ sent.id }}</v-list-tile-sub-title>
               </v-list-tile-content>
             </v-list-tile>
             <v-divider ></v-divider>
           </template>
         </v-list>
-
-
       </v-card>
     </v-flex>
   </v-layout>
@@ -73,15 +61,21 @@
     },
     computed: {
       receivedMessage () {
-        return this.$store.getters.getReceivedMessages(auth.currentUser.uid)
+        console.log('getters', this.$store.getters)
+        let messages = this.$store.getters.getReceivedMessages
+        console.log('messages', messages)
+        return messages
       },
       sentMessage () {
-        return this.$store.getters.getSentMessages(auth.currentUser.uid)
+        return this.$store.getters.getSentMessages
       }
     },
     created: function () {
-      console.log('sentMessages', this.sentMessage)
-      // console.log('current user', auth.currentUser.uid)
+      console.log('store', this.$store.getters)
+    },
+    mounted () {
+      this.$store.dispatch('loadSentMessage')
+      this.$store.dispatch('loadReceivedMessage')
     }
   }
 </script>
