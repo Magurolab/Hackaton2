@@ -18,7 +18,8 @@ export const store = new Vuex.Store({
     sentMessage: null,
     receivedMessage: null,
     uid: null,
-    date: new Date()
+    date: new Date(),
+    university: null
   },
   mutations: {
     setLoadedCards (state, payload) {
@@ -246,10 +247,10 @@ export const store = new Vuex.Store({
       const uid = auth.currentUser.uid
       const ref = db.ref('Users/' + uid + '/university')
       ref.on('value', function (snapshot) {
-        state.database = (snapshot.val())
+        state.university = (snapshot.val())
       })
       state.loading = false
-      return state.database
+      return state.university
     },
     getCards (state) {
       return state.cards
