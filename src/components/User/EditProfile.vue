@@ -14,6 +14,25 @@
           </v-flex>
           <v-flex>
             <v-text-field
+              name="username"
+              label="Username"
+              id="username"
+              type="text"
+              v-model="username"
+            ></v-text-field>
+          </v-flex>
+          <v-flex xs6>
+            <v-select
+              name="university"
+              label="University"
+              id="university"
+              :items="colleges"
+              single-line
+              v-model="university"
+            ></v-select>
+          </v-flex>
+          <v-flex>
+            <v-text-field
               name="Description"
               label="Description"
               id="description"
@@ -27,17 +46,21 @@
           </v-flex>
         </v-layout>
       </form>
+        <v-flex class="text-xs-right" mt-5>
+          <v-btn color="primary" @click="">Forget password</v-btn>
+        </v-flex>
       </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
-  import { auth } from '../../firebase'
   export default {
     data () {
       return {
-        description: '',
+        description: this.$store.state.userInfo.description,
+        username: this.$store.state.userInfo.username,
+        university: this.$store.state.userInfo.university,
         colleges: [
           'Mahidol University', 'Kasetsart University', 'Chulalongkorn University', 'Thammasat University',
           'Chiang Mai University', 'Prince of Songkla University', 'Khon Kaen University',
@@ -47,13 +70,6 @@
       }
     },
     created: function () {
-      // this.$store.dispatch('loadUser')
-      // console.log('curr user id:', auth.currentUser.uid)
-      // console.log(' user :', this.$store.state.user)
-      // console.log('username :', this.$store.state.user.username)
-      // console.log('description:', this.$store.state.user.description)
-      // console.log('uni:', this.$store.state.user.university)
-      // console.log('email:', this.$store.state.user.email)
     },
     methods: {
       userEdit () {

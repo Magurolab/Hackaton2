@@ -14,6 +14,15 @@
             </v-flex>
             <v-flex>
               <v-text-field
+                name="username"
+                label="Username"
+                id="username"
+                type="text"
+                v-model="username"
+                required></v-text-field>
+            </v-flex>
+            <v-flex>
+              <v-text-field
                 name="email"
                 label="Email"
                 id="email"
@@ -98,7 +107,9 @@ export default {
       this.$store.dispatch('userSignUp', {
         email: this.email,
         password: this.password,
-        university: this.university})
+        username: this.username,
+        university: this.university,
+        description: 'No desscription yet.'})
     }
   },
   watch: {

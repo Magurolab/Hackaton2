@@ -11,6 +11,7 @@ export const store = new Vuex.Store({
     cards: [],
     appTitle: 'My Awesome App',
     user: null,
+    userInfo: null,
     error: null,
     loading: false,
     database: null,
@@ -27,6 +28,10 @@ export const store = new Vuex.Store({
     setUser (state, payload) {
       state.user = payload
     },
+    setUserInfo (state, payload) {
+      state.userInfo = payload
+      console.log('user info ' + state.userInfo)
+    },
     setError (state, payload) {
       state.error = payload
     },
@@ -38,7 +43,7 @@ export const store = new Vuex.Store({
     },
     setReceivedMessage (state, payload) {
       state.receivedMessage = payload
-    },
+    }
   },
   actions: {
     loadSentMessage ({commit}) {
@@ -82,6 +87,13 @@ export const store = new Vuex.Store({
           }
         )
     },
+    loadUserInfo ({commit}) {
+      const uid = auth.currentUser.uid
+      const ref = db.ref('Users/' + uid)
+      ref.on('value', function (snapshot) {
+        commit('setUserInfo', snapshot.val())
+      })
+    },
     userSignUp ({commit}, payload) {
       commit('setLoading', true)
       firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
@@ -92,6 +104,7 @@ export const store = new Vuex.Store({
           email: payload.email,
           username: payload.username,
           university: payload.university,
+          description: payload.description
         })
         commit('setLoading', false)
         router.push('/home')
@@ -221,6 +234,9 @@ export const store = new Vuex.Store({
     },
     getUser (state) {
       return state.user
+    },
+    getUserInfo (state) {
+      return state.userInfo
     },
     getEmail () {
       return auth.currentUser.email
