@@ -13,7 +13,7 @@
               </v-alert>
             </v-flex>
             <v-flex xs6 sm3>
-              <p>My File Selector: <file-select v-model="file"></file-select></p>
+              <h1 class="body-1">My File Selector: <file-select v-model="file"></file-select></h1>
               <p v-if="file">{{file.name}}</p>
             </v-flex>
             <v-flex>

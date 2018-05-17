@@ -267,6 +267,17 @@ export const store = new Vuex.Store({
         return state.database
       }
     },
+    getCurrentSender (state) {
+      state.loading = true
+      return (senderId) => {
+        const ref = db.ref('Users/' + senderId + '/username/')
+        ref.on('value', function (snapshot) {
+          state.database = (snapshot.val())
+        })
+        state.loading = false
+        return state.database
+      }
+    },
     getSentMessages (state) {
       return state.sentMessage
     },
