@@ -22,7 +22,7 @@
                 <div>
                   {{'฿ ' + card.price}}
                 </div>
-                <v-btn icon @click="addWishlist(card)">
+                <v-btn icon @click="addWishlist(card.id)">
                   <v-icon>bookmark</v-icon>
                 </v-btn>
               </v-card-actions>
