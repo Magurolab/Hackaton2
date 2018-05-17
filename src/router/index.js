@@ -39,7 +39,7 @@ export default new Router({
       path: '/',
       name: 'Landing',
       component: Landing,
-      beforeEnter: isAuthorized
+      // beforeEnter: isAuthorized
     },
     {
       path: '/signin',

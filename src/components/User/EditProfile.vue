@@ -1,11 +1,11 @@
 <template>
   <v-container fluid>
     <v-layout row wrap>
-      <v-flex xs12 class="text-xs-center" mt-5>
-        <h1>Edit Profile</h1>
+      <v-flex xs12 class="text-xs-left" mt-5 offset-sm3 mt-3>
+        <h1 class="display-1">Account Settings</h1>
       </v-flex>
-      <v-flex xs12 sm6 offset-sm3 mt-3>
-      <form @submit.prevent="userEdit">
+
+      <v-flex xs12 sm6 offset-sm3 mt-5>
         <v-layout column>
           <v-flex>
             <v-alert type="error" dismissible v-model="alert">
@@ -41,17 +41,15 @@
               multi-line=""
             ></v-text-field>
           </v-flex>
-          <v-flex class="text-xs-right" mt-5>
-            <v-btn color="primary" type="submit">update</v-btn>
-          </v-flex>
         </v-layout>
-      </form>
-        <v-flex class="text-xs-right" mt-5>
-          <v-btn color="primary" @click="sendVerifyEmail">Verify email</v-btn>
+        <v-flex class="text-xs-left mt-1" >
+          <v-btn color="secondary" @click="sendVerifyEmail">Verify email</v-btn>
+          <v-btn color="secondary" @click="sendPasswordReset">Password reset</v-btn>
         </v-flex>
         <v-flex class="text-xs-right" mt-5>
-          <v-btn color="primary" @click="sendPasswordReset">Password reset</v-btn>
+          <v-btn color="primary" type="submit" @click="userEdit">update</v-btn>
         </v-flex>
+
       </v-flex>
     </v-layout>
   </v-container>
@@ -65,6 +63,7 @@
     },
     data () {
       return {
+        email: this.$store.state.userInfo.email,
         description: this.$store.state.userInfo.description,
         username: this.$store.state.userInfo.username,
         university: this.$store.state.userInfo.university,
@@ -96,6 +95,7 @@
           return
         }
         this.$store.dispatch('userEdit', {
+          email: this.email,
           username: this.username,
           university: this.university,
           description: this.description

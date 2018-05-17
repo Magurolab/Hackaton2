@@ -60,7 +60,6 @@
                 v-model="university"
               ></v-select>
             </v-flex>
-            {{this.university}}
             <v-flex class="text-xs-center" mt-5>
               <v-btn color="primary" type="submit" :disabled="loading">Sign Up</v-btn>
             </v-flex>
@@ -109,7 +108,7 @@ export default {
         password: this.password,
         username: this.username,
         university: this.university,
-        description: 'No desscription yet.'})
+        description: 'No description yet.'})
     }
   },
   watch: {
