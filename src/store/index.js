@@ -11,9 +11,12 @@ export const store = new Vuex.Store({
     cards: [],
     appTitle: 'My Awesome App',
     user: null,
+    userInfo: null,
     error: null,
     loading: false,
     database: null,
+    sentMessage: null,
+    receivedMessage: null,
     uid: null,
     date: new Date()
   },
@@ -25,14 +28,38 @@ export const store = new Vuex.Store({
     setUser (state, payload) {
       state.user = payload
     },
+    setUserInfo (state, payload) {
+      state.userInfo = payload
+      console.log('user info ' + state.userInfo)
+    },
     setError (state, payload) {
       state.error = payload
     },
     setLoading (state, payload) {
       state.loading = payload
+    },
+    setSentMessage (state, payload) {
+      state.sentMessage = payload
+    },
+    setReceivedMessage (state, payload) {
+      state.receivedMessage = payload
     }
   },
   actions: {
+    loadSentMessage ({commit}) {
+      const uid = auth.currentUser.uid
+      const ref = db.ref('Messages/' + uid + '/sent/')
+      ref.once('value', function (snapshot) {
+        commit('setSentMessage', snapshot.val())
+      })
+    },
+    loadReceivedMessage ({commit}) {
+      const uid = auth.currentUser.uid
+      const ref = db.ref('Messages/' + uid + '/received/')
+      ref.once('value', function (snapshot) {
+        commit('setReceivedMessage', snapshot.val())
+      })
+    },
     loadCards ({commit}) {
       commit('setLoading', true)
       firebase.database().ref('/Posts/').once('value')
@@ -60,14 +87,24 @@ export const store = new Vuex.Store({
           }
         )
     },
+    loadUserInfo ({commit}) {
+      const uid = auth.currentUser.uid
+      const ref = db.ref('Users/' + uid)
+      ref.on('value', function (snapshot) {
+        commit('setUserInfo', snapshot.val())
+      })
+    },
     userSignUp ({commit}, payload) {
       commit('setLoading', true)
       firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
       .then(firebaseUser => {
-        commit('setUser', {email: firebaseUser.email})
+        commit('setUser', {email: payload.email})
         const uid = auth.currentUser.uid
         db.ref('Users/' + uid).set({
-          university: payload.university
+          email: payload.email,
+          username: payload.username,
+          university: payload.university,
+          description: payload.description
         })
         commit('setLoading', false)
         router.push('/home')
@@ -81,7 +118,7 @@ export const store = new Vuex.Store({
       commit('setLoading', true)
       firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
       .then(firebaseUser => {
-        commit('setUser', {email: firebaseUser.email})
+        commit('setUser', payload)
         commit('setLoading', false)
         commit('setError', null)
         router.push('/home')
@@ -92,7 +129,7 @@ export const store = new Vuex.Store({
       })
     },
     autoSignIn ({commit}, payload) {
-      commit('setUser', {email: payload.email})
+      commit('setUser', payload)
     },
     userSignOut ({commit}) {
       firebase.auth().signOut()
@@ -103,11 +140,11 @@ export const store = new Vuex.Store({
     userEdit ({commit}, payload) {
       commit('setLoading', true)
       var newData = {
-        description: payload.description
+        username: payload.username,
+        description: payload.description,
+        university: payload.university
       }
-      // var newPostKey = firebase.database().ref().child('Users').push().key
       var updates = {}
-      // updates['/Users/' + newPostKey] = newData
       updates['/Users/' + auth.currentUser.uid] = newData
       commit('setLoading', false)
 
@@ -195,6 +232,12 @@ export const store = new Vuex.Store({
     isAuthenticated (state) {
       return state.user !== null && state.user !== undefined
     },
+    getUser (state) {
+      return state.user
+    },
+    getUserInfo (state) {
+      return state.userInfo
+    },
     getEmail () {
       return auth.currentUser.email
     },
@@ -223,26 +266,10 @@ export const store = new Vuex.Store({
       }
     },
     getSentMessages (state) {
-      state.loading = true
-      return (uid) => {
-        const ref = db.ref('Messages/' + uid + '/sent/')
-        ref.on('value', function (snapshot) {
-          state.database = (snapshot.val())
-        })
-        state.loading = false
-        return state.database
-      }
+      return state.sentMessage
     },
     getReceivedMessages (state) {
-      state.loading = true
-      return (uid) => {
-        const ref = db.ref('Messages/' + uid + '/received/')
-        ref.on('value', function (snapshot) {
-          state.database = (snapshot.val())
-        })
-        state.loading = false
-        return state.database
-      }
+      return state.receivedMessage
     },
     getOneReceivedMessage (state) {
       state.loading = true

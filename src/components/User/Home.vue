@@ -13,17 +13,13 @@
           </v-card-media>
           <v-card-title primary-title>
             <div>
-              <h3 class="headline mb-0">Kangaroo Valley Safari</h3>
-              <div>{{email}}</div>
-              <div>{{this.$store.getters.getUserUniversity}}</div>
+              <h3 class="headline mb-0">{{this.$store.state.userInfo.username}}</h3>
+              <div>{{this.$store.state.userInfo.email}} </div>
+              <div>{{this.$store.state.userInfo.university}} </div>
+              <div>{{this.$store.state.userInfo.description}} </div>
               <v-btn flat color="orange" v-if="this.$store.getters.getUserUniversity==null">Loading</v-btn>
             </div>
           </v-card-title>
-          <v-card-actions>
-            <v-btn flat color="orange">Share</v-btn>
-            <v-btn flat color="orange">Explore</v-btn>
-          </v-card-actions>
-
           <v-subheader> MY ITEMS </v-subheader>
           <v-container v-bind="{ [`grid-list-lg`]: true }" fluid>
             <v-layout row wrap>

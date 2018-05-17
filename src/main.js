@@ -33,7 +33,8 @@ const unsubscribe = firebase.auth()
       if (firebaseUser) {
         store.dispatch('autoSignIn', firebaseUser)
         store.dispatch('loadCards')
-
+        console.log('about to load user info')
+        store.dispatch('loadUserInfo')
       }
     }
   })

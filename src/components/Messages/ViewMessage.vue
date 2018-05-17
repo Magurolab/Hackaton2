@@ -52,7 +52,7 @@
     },
     data () {
       return {
-        reply: '',
+        reply: ''
       }
     },
     created: function () {
@@ -65,7 +65,7 @@
       },
       postItem () {
         const original = this.$store.getters.getCard(this.currentMessage.postId)
-        var shit = {
+        var modifiedUser = {
           category: original.category,
           description: original.description,
           name: original.name,
@@ -73,11 +73,7 @@
           url: original.url,
           user: this.currentMessage.sender
         }
-        console.log('ori' + original.user)
-        console.log('shit' + shit.user)
-        console.log('current user' + auth.currentUser.uid)
-
-        return shit
+        return modifiedUser
       }
     },
     methods: {

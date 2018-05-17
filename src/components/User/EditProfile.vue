@@ -14,11 +14,31 @@
           </v-flex>
           <v-flex>
             <v-text-field
+              name="username"
+              label="Username"
+              id="username"
+              type="text"
+              v-model="username"
+            ></v-text-field>
+          </v-flex>
+          <v-flex xs6>
+            <v-select
+              name="university"
+              label="University"
+              id="university"
+              :items="colleges"
+              single-line
+              v-model="university"
+            ></v-select>
+          </v-flex>
+          <v-flex>
+            <v-text-field
               name="Description"
               label="Description"
               id="description"
               type="description"
               v-model="description"
+              multi-line=""
             ></v-text-field>
           </v-flex>
           <v-flex class="text-xs-right" mt-5>
@@ -26,6 +46,9 @@
           </v-flex>
         </v-layout>
       </form>
+        <v-flex class="text-xs-right" mt-5>
+          <v-btn color="primary" @click="">Forget password</v-btn>
+        </v-flex>
       </v-flex>
     </v-layout>
   </v-container>
@@ -35,7 +58,9 @@
   export default {
     data () {
       return {
-        description: '',
+        description: this.$store.state.userInfo.description,
+        username: this.$store.state.userInfo.username,
+        university: this.$store.state.userInfo.university,
         colleges: [
           'Mahidol University', 'Kasetsart University', 'Chulalongkorn University', 'Thammasat University',
           'Chiang Mai University', 'Prince of Songkla University', 'Khon Kaen University',
@@ -44,9 +69,18 @@
         alert: false
       }
     },
+    created: function () {
+    },
     methods: {
       userEdit () {
-        this.$store.dispatch('userEdit', { description: this.description })
+        if (this.username.trim() === '' || this.description.trim() === '') {
+          return
+        }
+        this.$store.dispatch('userEdit', {
+          username: this.username,
+          university: this.university,
+          description: this.description
+        })
       }
     },
     computed: {
