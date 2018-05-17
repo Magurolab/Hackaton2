@@ -7,16 +7,21 @@
       </v-flex>
 
       <v-flex xs12 class="text-xs-center" mt-5>
-        <h1>Message from</h1>
+        <h1>Message from {{currentMessage.sender}}</h1>
       </v-flex>
       <v-flex xs12 sm6 offset-sm3 mt-3>
-        <form @submit.prevent="addItem">
+        <form @submit.prevent="sendMessage">
           <v-layout column>
-
             <v-flex >
-              <p>item details: price, item name</p>
-              <p>Date: </p>
+              <p>item details: </p>
+              <p>Name: {{postItem.name}}</p>
+              <p>Price: {{'฿ '+ postItem.price}}</p>
+
+              <p>Date: {{currentMessage.date}}} </p>
+
               <p>Message: </p>
+              <P> {{currentMessage.message}}</P>
+
             </v-flex>
             <v-flex xs6 sm3>
               <v-text-field
@@ -48,25 +53,45 @@
     data () {
       return {
         reply: '',
-        messageId: this.id
       }
     },
     created: function () {
-      // console.log('current date:', this.messageItem.date)
-      console.log('message id: ', this.messageId)
+      console.log('curr item name:', this.postItem.name)
+      console.log('curr item id:', this.postItem.id)
+    },
+    computed: {
+      currentMessage () {
+        return this.$store.getters.getOneReceivedMessage(this.id)
+      },
+      postItem () {
+        const original = this.$store.getters.getCard(this.currentMessage.postId)
+        var shit = {
+          category: original.category,
+          description: original.description,
+          name: original.name,
+          price: original.price,
+          url: original.url,
+          user: this.currentMessage.sender
+        }
+        console.log('ori' + original.user)
+        console.log('shit' + shit.user)
+        console.log('current user' + auth.currentUser.uid)
+
+        return shit
+      }
     },
     methods: {
-      // sendMessage () {
-      //   console.log('MEHHHH')
-      //   const itemData = {
-      //     message: this.message,
-      //     itemId: this.itemId,
-      //     currentItem: this.currentItem,
-      //     dateTime: this.$store.getters.getDate
-      //   }
-      //   this.$store.dispatch('sendMessage', itemData)
-      //   this.dialog = false
-      // }
+      sendMessage () {
+        console.log('MEHHHH')
+        const itemData = {
+          message: this.reply,
+          itemId: this.currentMessage.postId,
+          currentItem: this.postItem,
+          dateTime: this.$store.getters.getDate
+        }
+        this.$store.dispatch('sendMessage', itemData)
+        this.$router.push('/inbox')
+      }
     }
   }
 </script>

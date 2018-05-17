@@ -50,8 +50,9 @@
         return this.$store.state.loading
       },
       cards () {
-        console.log(this.$store.getters.getCards)
-        return this.$store.getters.getCards
+        return this.$store.getters.getCards.filter(function (u) {
+          return u.user !== auth.currentUser.uid
+        })
       }
     },
     methods: {

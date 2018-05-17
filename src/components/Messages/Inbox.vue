@@ -20,9 +20,10 @@
 
         <v-list two-line>
           <template v-for="(rec, index) in receivedMessage ">
-            <v-list-tile :key="rec"
+            <v-list-tile :key="index"
                          avatar ripple
-                         @click="onLoadMessage">
+                         @click="onLoadMessage(rec.id)"
+            >
               <v-list-tile-content>
                 <v-list-tile-title> Username </v-list-tile-title>
                 <v-list-tile-sub-title class="text--primary">{{ rec.date }}</v-list-tile-sub-title>
@@ -39,7 +40,6 @@
           <template v-for="(sent, index) in sentMessage">
             <v-list-tile :key="index"
                          avatar ripple
-                         @click="onLoadMessage(sent.id)"
             >
               <v-list-tile-content>
                 <v-list-tile-title> Username </v-list-tile-title>
@@ -73,10 +73,10 @@
     },
     computed: {
       receivedMessage () {
-        return this.$store.getters.getReceivedMessage(auth.currentUser.uid)
+        return this.$store.getters.getReceivedMessages(auth.currentUser.uid)
       },
       sentMessage () {
-        return this.$store.getters.getSentMessage(auth.currentUser.uid)
+        return this.$store.getters.getSentMessages(auth.currentUser.uid)
       }
     },
     created: function () {

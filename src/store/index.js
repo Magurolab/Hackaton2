@@ -222,7 +222,7 @@ export const store = new Vuex.Store({
         return state.database
       }
     },
-    getSentMessage (state) {
+    getSentMessages (state) {
       state.loading = true
       return (uid) => {
         const ref = db.ref('Messages/' + uid + '/sent/')
@@ -233,10 +233,22 @@ export const store = new Vuex.Store({
         return state.database
       }
     },
-    getReceivedMessage (state) {
+    getReceivedMessages (state) {
       state.loading = true
       return (uid) => {
         const ref = db.ref('Messages/' + uid + '/received/')
+        ref.on('value', function (snapshot) {
+          state.database = (snapshot.val())
+        })
+        state.loading = false
+        return state.database
+      }
+    },
+    getOneReceivedMessage (state) {
+      state.loading = true
+      return (mid) => {
+        const uid = auth.currentUser.uid
+        const ref = db.ref('Messages/' + uid + '/received/' + mid)
         ref.on('value', function (snapshot) {
           state.database = (snapshot.val())
         })
