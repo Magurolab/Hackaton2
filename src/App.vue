@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-toolbar color="pink darken-1" app absolute clipped-left dense app >
+    <v-toolbar color="cyan lighten-1" app absolute clipped-left dense app >
       <v-toolbar-title class="white--text mr-3">Alibaybay</v-toolbar-title>
       <v-text-field
         solo-inverted
@@ -30,8 +30,8 @@
         v-if="isAuthenticated"
         slot="extension"
         centered
-        color="pink darken-1"
-        slider-color="pink lighten-5"
+        color="cyan lighten-1"
+        slider-color="lime lighten-3"
       >
         <v-tab
           v-for="(item,i) in items"
@@ -49,7 +49,7 @@
       <!--<v-container fluid fill-height class="grey lighten-4">-->
       <!--</v-container>-->
     </v-content>
-    <v-footer class="primary white--text pa-5">
+    <v-footer class="secondary white--text pa-5">
       <v-spacer></v-spacer>
       <div>&copy; {{ new Date().getFullYear() }}</div>
     </v-footer>

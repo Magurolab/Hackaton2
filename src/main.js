@@ -10,8 +10,8 @@ import VueFire from 'vuefire'
 /* eslint-disable */
 Vue.use(Vuetify, {
   theme: {
-    primary: "#AD1457",
-    secondary: "#e57373",
+    primary: "#00ACC1",
+    secondary: "#0097A7",
     accent: "#9c27b0",
     error: "#f44336",
     warning: "#ffeb3b",
